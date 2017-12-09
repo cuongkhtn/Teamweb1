@@ -9,6 +9,6 @@ class loaisp extends Model
     protected  $table='loaisp';
     public function loaisp()
     {
-    	return this->hasmany('App\sanpham','idloai','id');//model liên quan ,khóa ngoại  của bảng con,khóa chính của mình 
+    	return $this->hasmany('App\sanpham','idloai','id');//model liên quan ,khóa ngoại  của bảng con,khóa chính của mình 
     }
 }

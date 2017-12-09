@@ -111,11 +111,12 @@
 				<nav class="main-menu">
 					<ul class="l-inline ov">
 						<li><a href="/">Trang chủ</a></li>
-						<li><a href="sp">Sản phẩm</a>
+						<!--  <li><a href="{{route('trang-chu')}}">Trang chủ</a></li> -->
+						<li><a href="#">Sản phẩm</a>
 							<ul class="sub-menu">
-								<li><a href="sp">Sản phẩm 1</a></li>
-								<li><a href="sp">Sản phẩm 2</a></li>
-								<li><a href="sp">Sản phẩm 3</a></li>
+								@foreach($menu as $mn)
+								<li><a href={{route('san-pham',$mn->id)}}>{{$mn->name}}</a></li>
+								@endforeach
 							</ul>
 						</li>
 						<li><a href="about">Giới thiệu</a></li>

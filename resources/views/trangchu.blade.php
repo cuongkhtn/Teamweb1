@@ -33,7 +33,7 @@
 						<div class="beta-products-list">
 							<h4>Sản phẩm mới</h4>
 							<div class="beta-products-details">
-								<p class="pull-left">Tìm thấy {{count($sanpham)}} sản phẩm </p>
+								<p class="pull-left">Tìm thấy {{count($sanphamc)}} sản phẩm </p>
 								<div class="clearfix"></div>
 							</div>
 								<br>
@@ -44,7 +44,7 @@
 									<p class="single-item-title">{{$sp->name}}</p>
 									<div class="single-item">
 										<div class="single-item-header">
-											<a href="chitiet"><img src="qt69admin/image/product/{{$sp->image}}" alt="" height="243px" width="100%"></a>
+											<a href="chitiet"><img src="qt69admin/image/product/{{$sp->image}}" alt="cường đẹp trai =)))" height="243px" width="100%"></a>
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-price">
@@ -68,23 +68,24 @@
 								</div>
 								@endforeach
 							</div>
+							<div>{{$sanpham->links()}}</div>
 						</div> <!-- .beta-products-list -->
 
 						<div class="space50">&nbsp;</div>
 						<div class="beta-products-list">
-							<h4>Sản phẩm bán chạy</h4>
+							<h4>Sản phẩm khuyến mãi</h4>
 							<div class="beta-products-details">
-								<p class="pull-left">Tìm thấy {{count($topsp)}} sản phẩm</p>
+								<p class="pull-left">Tìm thấy {{count($spkmc)}} sản phẩm</p>
 								<div class="clearfix"></div>
 							</div>
 							
 							<div class="row" id="rowborder">
-								@foreach($topsp as $top)
+								@foreach($spkm as $top)
 								<div class="col-sm-3" id='col3'>
 									<p class="single-item-title">{{$top->name}}</p>
 									<div class="single-item">
 										<div class="single-item-header">
-											<a href="chitiet"><img src="qt69admin/image/product/{{$top->image}}" alt=""></a>
+											<a href="chitiet"><img src="qt69admin/image/product/{{$top->image}}" alt="" height="243px" width="100%"></a>
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-price">
@@ -109,6 +110,7 @@
 								</div> <!-- .beta-products-list -->
 								@endforeach
 								</div>
+								<div>{{$spkm->links()}}</div>
 							</div>
 							</div>
 						</div> <!-- end section with sidebar and main content -->
