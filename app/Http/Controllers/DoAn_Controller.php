@@ -12,7 +12,8 @@ class DoAn_Controller extends Controller
     {
         $slide = slide::all();
         $sanpham = sanpham::where('new',1)->get();
-    	return view('trangchu',compact('slide','sanpham'));
+        $topsp =sanpham::where('new',2)->get();
+    	return view('trangchu',compact('slide','sanpham','topsp'));
     }
     public function getsp()
     {

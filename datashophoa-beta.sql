@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2017 at 06:24 PM
+-- Generation Time: Dec 09, 2017 at 07:32 AM
 -- Server version: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -92,23 +92,23 @@ CREATE TABLE IF NOT EXISTS `sanpham` (
 --
 
 INSERT INTO `sanpham` (`id`, `name`, `idloai`, `description`, `image`, `gia`, `giakm`, `soluong`, `created_at`, `updated_at`, `new`) VALUES
-(4, 'Hoa baby', 1, '', 'hc1.jpg', 590000.00, 0.00, 0, NULL, NULL, 1),
+(4, 'Hoa baby', 1, '', 'hc1.jpg', 590000.00, 500000.00, 0, NULL, NULL, 1),
 (5, 'Hoa cưới 57', 1, '', 'hc2.jpg', 550000.00, 0.00, 0, NULL, NULL, 1),
-(6, 'Tím thủy chung', 1, '', 'hc3.gif', 550000.00, 0.00, 0, NULL, NULL, 1),
+(6, 'Tím thủy chung', 1, '', 'hc3.gif', 550000.00, 0.00, 0, NULL, NULL, 2),
 (7, 'MS White', 1, '', 'hc4.gif', 900000.00, 0.00, 0, NULL, NULL, 1),
 (8, 'Hoa cưới 56', 1, '', 'hc5.gif', 600000.00, 0.00, 0, NULL, NULL, 1),
-(9, 'Hoa cưới 55', 1, '', 'hc6.jpg', 1000000.00, 0.00, 0, NULL, NULL, 1),
+(9, 'Hoa cưới 55', 1, '', 'hc6.jpg', 1000000.00, 800000.00, 0, NULL, NULL, 1),
 (10, 'Hoa cưới 54', 1, '', 'hc7.jpg', 500000.00, 0.00, 0, NULL, NULL, 1),
 (11, 'Hoa cưới 53', 1, '', 'hc8.jpg', 600000.00, 0.00, 0, NULL, NULL, 1),
-(12, 'Hoa cưới 52', 1, '', 'hc9.jpg', 720000.00, 0.00, 0, NULL, NULL, 1),
+(12, 'Hoa cưới 52', 1, '', 'hc9.jpg', 720000.00, 600000.00, 0, NULL, NULL, 1),
 (13, 'Hoa cưới 51', 1, '', 'hc10.jpg', 590000.00, 0.00, 0, NULL, NULL, 1),
 (14, 'Hoa cưới 50', 1, '', 'hc11.jpg', 550000.00, 0.00, 0, NULL, NULL, 1),
 (15, 'Hoa cưới 49', 1, '', 'hc12.jpg', 600000.00, 0.00, 0, NULL, NULL, 1),
-(16, 'Hoa cưới 48', 1, '', 'hc13.jpg', 680000.00, 0.00, 0, NULL, NULL, 0),
+(16, 'Hoa cưới 48', 1, '', 'hc13.jpg', 680000.00, 500000.00, 0, NULL, NULL, 0),
 (17, 'Hoa cưới 47', 1, '', 'hc14.jpg', 670000.00, 0.00, 0, NULL, NULL, 0),
 (18, 'Hoa cưới 46', 1, '', 'hc15.jpg', 500000.00, 0.00, 0, NULL, NULL, 0),
 (19, 'Hoa cưới 45', 1, '', 'hc16.jpg', 400000.00, 0.00, 0, NULL, NULL, 0),
-(20, 'Sánh bước bên nhau', 1, '', '', 450000.00, 0.00, 0, NULL, NULL, 0),
+(20, 'Sánh bước bên nhau', 1, '', 'hc17.jpg', 450000.00, 400000.00, 0, NULL, NULL, 2),
 (21, 'Hoa Cưới 44', 1, '', 'hc18.jpg', 400000.00, 0.00, 0, NULL, NULL, 0),
 (22, 'Hoa Cưới 42', 1, '', 'hc19.jpg', 720000.00, 0.00, 0, NULL, NULL, 0),
 (23, 'Hoa cưới 33', 1, '', 'hc20.jpg', 800000.00, 0.00, 0, NULL, NULL, 0),
@@ -222,7 +222,141 @@ ALTER TABLE `slide`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;--
+-- Database: `id2990990_doan`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Categories`
+--
+
+CREATE TABLE IF NOT EXISTS `Categories` (
+  `id` int(11) NOT NULL,
+  `ten` varchar(31) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Categories`
+--
+
+INSERT INTO `Categories` (`id`, `ten`) VALUES
+(1, 'Nokia'),
+(2, 'Apple'),
+(3, 'Samsung'),
+(4, 'OPPO'),
+(5, 'Sony'),
+(6, 'HTC'),
+(7, 'Asus'),
+(8, 'Lenovo'),
+(9, 'BKAV'),
+(10, 'Xiaomi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chitietsp`
+--
+
+CREATE TABLE IF NOT EXISTS `chitietsp` (
+  `id` int(11) NOT NULL,
+  `id_theloai` int(11) NOT NULL,
+  `ten` varchar(51) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(101) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mota` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chitietsp`
+--
+
+INSERT INTO `chitietsp` (`id`, `id_theloai`, `ten`, `image`, `mota`, `gia`) VALUES
+(1, 1, 'Nokia 105 Single Sim (2017)', 'qt64_admin/images/nokia1.png', 'Màn hình: QVGA, 2.4 inches\r\nHỗ trợ 2 sim 2 sóng\r\nDanh bạ 2000 số\r\nCamera: VGA\r\nPin: 1020 mAh', 350);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
+--
+
+CREATE TABLE IF NOT EXISTS `login` (
+  `email` varchar(51) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pass` varchar(51) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fname` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lname` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int(10) unsigned NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(7, '2017_11_28_174403_create_login_table', 1),
+(8, '2017_12_01_003121_create_cat_table', 1),
+(9, '2017_12_01_003529_create_chtietsp_table', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Categories`
+--
+ALTER TABLE `Categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `chitietsp`
+--
+ALTER TABLE `chitietsp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chitietsp_id_theloai_foreign` (`id_theloai`);
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `chitietsp`
+--
+ALTER TABLE `chitietsp`
+  ADD CONSTRAINT `chitietsp_id_theloai_foreign` FOREIGN KEY (`id_theloai`) REFERENCES `Categories` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
