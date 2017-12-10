@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>DO-AN</title>
+	<title>Shophoa360</title>
 	<base href="{{asset('')}}">
 	<link href='https://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -142,7 +142,7 @@
 				</div>
 				<div class="col-sm-2">
 					<div class="widget">
-						<h4 class="widget-title">Information</h4>
+						<h4 class="widget-title">Thông Tin</h4>
 						<div>
 							<ul>
 								<li><a href="blog_fullwidth_2col.html"><i class="fa fa-chevron-right"></i> Web Design</a></li>
@@ -158,12 +158,12 @@
 				<div class="col-sm-4">
 				 <div class="col-sm-10">
 					<div class="widget">
-						<h4 class="widget-title">Contact Us</h4>
+						<h4 class="widget-title">Liên Hệ</h4>
 						<div>
 							<div class="contact-info">
 								<i class="fa fa-map-marker"></i>
-								<p>30 South Park Avenue San Francisco, CA 94108 Phone: +78 123 456 78</p>
-								<p>Nemo enim ipsam voluptatem quia voluptas sit asnatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione.</p>
+								<p>227 Nguyễn Văn Cừ P4 Quận 5 Phone: +84 1657235365</p>
+								<p>Hoặc liên lạc qua địa chỉ Mail  Cuonganh365@gmail.com</p>
 							</div>
 						</div>
 					</div>
@@ -171,7 +171,7 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="widget">
-						<h4 class="widget-title">Newsletter Subscribe</h4>
+						<h4 class="widget-title">Đăng ký nhận tin</h4>
 						<form action="#" method="post">
 							<input type="email" name="your_email">
 							<button class="pull-right" type="submit">Subscribe <i class="fa fa-chevron-right"></i></button>

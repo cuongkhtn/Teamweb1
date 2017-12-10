@@ -108,7 +108,7 @@
 						<div class="widget-body">
 							<div class="beta-sales beta-lists">
 								<div class="media beta-sales-item">
-									<a class="pull-left" href="{{route('chitietsp',$sptt->id)}}"><img src="qt69admin/image/product/{{$tsp->image}}" alt=""></a>
+									<a class="pull-left" href="{{route('chitietsp',$tsp->id)}}"><img src="qt69admin/image/product/{{$tsp->image}}" alt=""></a>
 									<div class="media-body">
 										{{$tsp->name}}
 										<span class="beta-sales-price">
@@ -133,7 +133,7 @@
 							@foreach($sanpham as $spm)
 							<div class="beta-sales beta-lists">
 								<div class="media beta-sales-item">
-									<a class="pull-left" href="{{route('chitietsp',$sptt->id)}}"><img src="qt69admin/image/product/{{$spm->image}}" alt=""></a>
+									<a class="pull-left" href="{{route('chitietsp',$spm->id)}}"><img src="qt69admin/image/product/{{$spm->image}}" alt=""></a>
 									<div class="media-body">
 										{{$spm->name}} 
 										<span class="beta-sales-price">

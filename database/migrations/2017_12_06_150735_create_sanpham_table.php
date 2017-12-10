@@ -19,8 +19,8 @@ class CreateSanphamTable extends Migration
             $table->integer('idloai');
             $table->string('description',255);
             $table->string('image',100);
-            $table->float('gia');
-            $table->float('giakm');
+            $table->int('gia');
+            $table->int('giakm');
             $table->integer('soluong');
             $table->integer('new');
             $table->timestamps();

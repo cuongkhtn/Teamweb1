@@ -43,4 +43,39 @@ class DoAn_Controller extends Controller
         $topsp = sanpham::where('new',2)->paginate(3);
         return view('chitietsp',compact('chitiet','sptt','topsp'));
     }
+
+    public function getadmin()
+    {
+        return view('admin.sanpham');
+    }
+
+    public function getdslh()
+    {
+        return view('admin.loaisp');
+    }
+
+    public function getthemlh()
+    {
+        return view('admin.themloaisp');
+    }
+
+    public function getdsh()
+    {
+        return view('admin.sanpham');
+    }
+
+    public function getthemh()
+    {
+        return view('admin.themsp');
+    }
+
+    public function getuser()
+    {
+        return view('admin.user');
+    }
+
+    public function getthemuser()
+    {
+        return view('admin.them_user');
+    }
 }
