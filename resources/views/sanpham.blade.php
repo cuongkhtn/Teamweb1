@@ -8,8 +8,8 @@
 				<div class="row">
 					<div class="col-sm-3">
 						<ul class="aside-menu">
-							@foreach($name_all as $nsp)
-							<li><a href="#">{{$nsp->name}}</a></li>
+							@foreach($menu as $nsp)
+							<li><a href="{{route('san-pham',$nsp->id)}}">{{$nsp->name}}</a></li>
 							@endforeach
 						</ul>
 					</div>
@@ -26,7 +26,7 @@
 								<p class="single-item-title">{{$tsp->name}}</p>
 								<div class="single-item">
 									<div class="single-item-header">
-										<a href="chitiet"><img src="qt69admin/image/product/{{$tsp->image}}" alt="cường đẹp trai =)))"  height="243px" width="100%"></a>
+										<a href="{{route('chitietsp',$tsp->id)}}"><img src="qt69admin/image/product/{{$tsp->image}}" alt="cường đẹp trai =)))"  height="243px" width="100%"></a>
 									</div>
 									<div class="single-item-body">
 										<p class="single-item-price">

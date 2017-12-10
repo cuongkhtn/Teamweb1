@@ -7,44 +7,35 @@
 
 					<div class="row">
 						<div class="col-sm-4">
-							<img src="qt69admin/assets/dest/images/products/6.jpg" alt="">
+							<img src="qt69admin/image/product/{{$chitiet->image}}" alt="cường đẹp trai =)))"  height="243px" width="100%">	
+							@if($chitiet -> giakm!=0)
+													<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+												@endif
 						</div>
-						<div class="col-sm-8">
+						<div class="col-sm-8">							
 							<div class="single-item-body">
-								<p class="single-item-title">Sample Woman Top</p>
+								<p class="single-item-title">{{$chitiet->name}}</p>
 								<p class="single-item-price">
-									<span>$34.55</span>
-								</p>
+											@if($chitiet -> giakm!=0)
+													<span class="flash-del">{{$chitiet->gia}} VND</span>
+													<span class="flash-sale">{{$chitiet->giakm}} VND</span> 
+												@else
+													<span class="flash-sale">{{$chitiet->gia}} VND</span>
+												@endif
+										</p>
 							</div>
-
 							<div class="clearfix"></div>
 							<div class="space20">&nbsp;</div>
 
 							<div class="single-item-desc">
-								<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo ms id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
+								<p>Bó hoa cưới cầm tay Mùa Của Yêu Thương là sắc thắm của mùa hè, xanh, đỏ, cam, trắng tạo vẻ trẻ trung cho ngày cưới của bạn.</p>
 							</div>
 							<div class="space20">&nbsp;</div>
 
-							<p>Options:</p>
+							<p>Tùy chọn:</p>
 							<div class="single-item-options">
-								<select class="wc-select" name="size">
-									<option>Size</option>
-									<option value="XS">XS</option>
-									<option value="S">S</option>
-									<option value="M">M</option>
-									<option value="L">L</option>
-									<option value="XL">XL</option>
-								</select>
 								<select class="wc-select" name="color">
-									<option>Color</option>
-									<option value="Red">Red</option>
-									<option value="Green">Green</option>
-									<option value="Yellow">Yellow</option>
-									<option value="Black">Black</option>
-									<option value="White">White</option>
-								</select>
-								<select class="wc-select" name="color">
-									<option>Qty</option>
+									<option>Số lượng:</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -74,138 +65,90 @@
 					</div>
 					<div class="space50">&nbsp;</div>
 					<div class="beta-products-list">
-						<h4>Related Products</h4>
+						<h4>Sản phẩm tương tự</h4>
 
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="single-item">
-									<div class="single-item-header">
-										<a href="chitiet"><img src="qt69admin/assets/dest/images/products/4.jpg" alt=""></a>
-									</div>
-									<div class="single-item-body">
-										<p class="single-item-title">Sample Woman Top</p>
-										<p class="single-item-price">
-											<span>$34.55</span>
-										</p>
-									</div>
-									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="chitiet"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="chitiet">Details <i class="fa fa-chevron-right"></i></a>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="single-item">
-									<div class="single-item-header">
-										<a href="chitiet"><img src="qt69admin/assets/dest/images/products/5.jpg" alt=""></a>
-									</div>
-									<div class="single-item-body">
-										<p class="single-item-title">Sample Woman Top</p>
-										<p class="single-item-price">
-											<span>$34.55</span>
-										</p>
-									</div>
-									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="chitiet"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="chitiet">Details <i class="fa fa-chevron-right"></i></a>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="single-item">
-									<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+						<div class="row" id="rowborder">
+							@foreach($sptt as $sptt)
+								<div class="col-sm-4" id='col3'>
+									<p class="single-item-title">{{$sptt->name}}</p>
+									<div class="single-item">
+										<div class="single-item-header">
+											<a href="{{route('chitietsp',$sptt->id)}}"><img src="qt69admin/image/product/{{$sptt->image}}" alt="" height="243px" width="100%"></a>
+										</div>
+										<div class="single-item-body">
+											<p class="single-item-price">
+												@if($sptt -> giakm!=0)
+													<span class="flash-del">{{$sptt->gia}} VND</span>
+													<span class="flash-sale">{{$sptt->giakm}} VND</span>
+													<div class="ribbon-wrapper"><div class="ribbon sale">SALE</div></div>
+												@else
+													<span class="flash-sale">{{$sptt->gia}} VND</span>
+												@endif
 
-									<div class="single-item-header">
-										<a href="chitiet"><img src="qt69admin/assets/dest/images/products/6.jpg" alt=""></a>
+											</p>
+										</div>
+										<div class="single-item-caption">
+											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href="product.html"> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+											<div class="clearfix"></div>
+											<br>
+											<br>
+										</div>
 									</div>
-									<div class="single-item-body">
-										<p class="single-item-title">Sample Woman Top</p>
-										<p class="single-item-price">
-											<span class="flash-del">$34.55</span>
-											<span class="flash-sale">$33.55</span>
-										</p>
-									</div>
-									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="chitiet"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="chitiet">Details <i class="fa fa-chevron-right"></i></a>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
+								
+								</div> <!-- .beta-products-list -->
+								@endforeach
 						</div>
-					</div> <!-- .beta-products-list -->
+					</div>
 				</div>
 				<div class="col-sm-3 aside">
 					<div class="widget">
-						<h3 class="widget-title">Best Sellers</h3>
+						<h3 class="widget-title">Bán chạy nhất</h3>
+						@foreach($topsp as $tsp)
 						<div class="widget-body">
 							<div class="beta-sales beta-lists">
 								<div class="media beta-sales-item">
-									<a class="pull-left" href="chitiet"><img src="qt69admin/assets/dest/images/products/sales/1.png" alt=""></a>
+									<a class="pull-left" href="{{route('chitietsp',$sptt->id)}}"><img src="qt69admin/image/product/{{$tsp->image}}" alt=""></a>
 									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="chitiet"><img src="qt69admin/assets/dest/images/products/sales/2.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="chitiet"><img src="qt69admin/assets/dest/images/products/sales/3.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="chitiet"><img src="qt69admin/assets/dest/images/products/sales/4.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
+										{{$tsp->name}}
+										<span class="beta-sales-price">
+											<br>
+											@if($tsp -> giakm!=0)
+													<span class="flash-del" style="font-size: 16px">{{$tsp->gia}} VND</span>
+													<span class="flash-sale" style="font-size: 16px">{{$tsp->giakm}} VND</span>
+													<div class="ribbon-wrapper"><div class="ribbon sale">HOT</div></div>
+												@else
+													<span class="flash-sale" style="font-size: 16px">{{$tsp->gia}} VND</span>
+												@endif
+										</span>
 									</div>
 								</div>
 							</div>
 						</div>
+						@endforeach
 					</div> <!-- best sellers widget -->
 					<div class="widget">
-						<h3 class="widget-title">New Products</h3>
+						<h3 class="widget-title">Sản phẩm mới </h3>
 						<div class="widget-body">
+							@foreach($sanpham as $spm)
 							<div class="beta-sales beta-lists">
 								<div class="media beta-sales-item">
-									<a class="pull-left" href="chitiet"><img src="qt69admin/assets/dest/images/products/sales/1.png" alt=""></a>
+									<a class="pull-left" href="{{route('chitietsp',$sptt->id)}}"><img src="qt69admin/image/product/{{$spm->image}}" alt=""></a>
 									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
+										{{$spm->name}} 
+										<span class="beta-sales-price">
+											<br>
+											@if($spm -> giakm!=0)
+													<span class="flash-del" style="font-size: 16px">{{$spm->gia}} VND</span>
+													<span class="flash-sale" style="font-size: 16px">{{$spm->giakm}} VND</span>
+												@else
+													<span class="flash-sale" style="font-size: 16px">{{$spm->gia}} VND</span>
+												@endif
+										</span>
 									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="chitiet"><img src="qt69admin/assets/dest/images/products/sales/2.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="chitiet"><img src="qt69admin/assets/dest/images/products/sales/3.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="chitiet"><img src="qt69admin/assets/dest/images/products/sales/4.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
+								</div>															
 							</div>
+							@endforeach
 						</div>
 					</div> <!-- best sellers widget -->
 				</div>

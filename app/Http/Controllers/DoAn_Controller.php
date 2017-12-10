@@ -14,9 +14,8 @@ class DoAn_Controller extends Controller
         $slide = slide::all();
         $sanphamc = sanpham::where('new',1)->get();//phân trang (paginate),get()
         $spkmc =sanpham::where('giakm','<>',0)->get();
-        $sanpham = sanpham::where('new',1)->paginate(4);//phân trang (paginate),get()
         $spkm =sanpham::where('giakm','<>',0)->paginate(4);
-    	return view('trangchu',compact('slide','sanpham','spkm','sanphamc','spkmc'));
+    	return view('trangchu',compact('slide','spkm','sanphamc','spkmc'));
         
     }
     public function getsp($sp)
@@ -24,8 +23,7 @@ class DoAn_Controller extends Controller
         $trangsp =sanpham::where('idloai',$sp)->paginate(9);
         $trangsp1 =sanpham::where('idloai',$sp)->get();
         $namesp =loaisp::where('id',$sp)->first();
-        $name_all =loaisp::all();
-    	return view('sanpham',compact('trangsp','namesp','trangsp1','name_all'));
+    	return view('sanpham',compact('trangsp','namesp','trangsp1'));
     }
     public function getabout()
     {
@@ -35,8 +33,14 @@ class DoAn_Controller extends Controller
     {
     	return view('contacts');
     }
-         public function getchitietsp()
+         public function getchitietsp($sp)
     {
-        return view('chitietsp');
+        $chitiet=sanpham::where('id',$sp)->first();
+        $sptt=sanpham::where([
+            ['idloai',$chitiet['idloai']],
+            ['id','<>',$chitiet['id']],
+            ])->inRandomOrder()->paginate(3);
+        $topsp = sanpham::where('new',2)->paginate(3);
+        return view('chitietsp',compact('chitiet','sptt','topsp'));
     }
 }

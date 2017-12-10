@@ -112,7 +112,8 @@
 					<ul class="l-inline ov">
 						<li><a href="/">Trang chủ</a></li>
 						<!--  <li><a href="{{route('trang-chu')}}">Trang chủ</a></li> -->
-						<li><a href="#">Sản phẩm</a>
+						<li><a href="#
+							">Sản phẩm</a>
 							<ul class="sub-menu">
 								@foreach($menu as $mn)
 								<li><a href={{route('san-pham',$mn->id)}}>{{$mn->name}}</a></li>

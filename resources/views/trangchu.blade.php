@@ -44,7 +44,7 @@
 									<p class="single-item-title">{{$sp->name}}</p>
 									<div class="single-item">
 										<div class="single-item-header">
-											<a href="chitiet"><img src="qt69admin/image/product/{{$sp->image}}" alt="cường đẹp trai =)))" height="243px" width="100%"></a>
+											<a href="{{route('chitietsp',$sp->id)}}"><img src="qt69admin/image/product/{{$sp->image}}" alt="cường đẹp trai =)))" height="243px" width="100%"></a>
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-price">
@@ -85,7 +85,7 @@
 									<p class="single-item-title">{{$top->name}}</p>
 									<div class="single-item">
 										<div class="single-item-header">
-											<a href="chitiet"><img src="qt69admin/image/product/{{$top->image}}" alt="" height="243px" width="100%"></a>
+											<a href="{{route('chitietsp',$top->id)}}"><img src="qt69admin/image/product/{{$top->image}}" alt="" height="243px" width="100%"></a>
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-price">
