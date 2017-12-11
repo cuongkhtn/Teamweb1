@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['master','sanpham'],function($mn) // tham số gồm view sẽ chia sẽ và 1 function($tham số bất kì)
+        view()->composer(['master','sanpham','admin.loaisp','admin.sanpham'],function($mn) // tham số gồm view sẽ chia sẽ và 1 function($tham số bất kì)
             {
                  $menu=loaisp::all();
                  $mn->with('menu',$menu);//tên truyền và giá trị truyền

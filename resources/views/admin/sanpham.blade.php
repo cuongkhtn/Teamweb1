@@ -13,33 +13,44 @@
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Date</th>
-                                <th>Status</th>
+                                <th>Tên</th>
+                                <th>Tên loại</th>
+                                <th>Mô tả</th>
+                                <th>Giá</th>
+                                <th>Giá KM</th>
+                                <th>Số lượng</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($dsh as $dsh) 
+                            @if($dsh->id % 2 !=0)
                             <tr class="odd gradeX" align="center">
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
+                                <td>{{$dsh->id}}</td>
+                                <td>{{$dsh->name}}</td>
+                                 <td>{{$menu[0]->name}}</td>
+                                <td>{{$dsh->description}}</td>
+                                <td>{{$dsh->gia}}</td>
+                                <td>{{$dsh->giakm}}</td>
+                                <td>{{$dsh->soluong}}</td>
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
                             </tr>
+                            @else
                             <tr class="even gradeC" align="center">
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
+                                <td>{{$dsh->id}}</td>
+                                <td>{{$dsh->name}}</td>
+                                <td>{{$menu[0]->name}}</td>
+                                <td>{{$dsh->description}}</td>
+                                <td>{{$dsh->gia}}</td>
+                                <td>{{$dsh->giakm}}</td>
+                                <td>{{$dsh->soluong}}</td>
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
                             </tr>
+                            @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

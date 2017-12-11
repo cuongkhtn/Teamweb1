@@ -14,29 +14,28 @@
                             <tr align="center">
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Category Parent</th>
-                                <th>Status</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($menu as $ds)
+                            @if($ds->id % 2 !=0)
                             <tr class="odd gradeX" align="center">
-                                <td>1</td>
-                                <td>Tin Tức</td>
-                                <td>None</td>
-                                <td>Hiện</td>
+                                <td>{{$ds->id}}</td>
+                                <td>{{$ds->name}}</td>
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
                             </tr>
+                            @else
                             <tr class="even gradeC" align="center">
-                                <td>2</td>
-                                <td>Bóng Đá</td>
-                                <td>Thể Thao</td>
-                                <td>Ẩn</td>
+                                <td>{{$ds->id}}</td>
+                                <td>{{$ds->name}}</td>
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
                             </tr>
+                            @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

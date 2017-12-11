@@ -46,11 +46,12 @@ class DoAn_Controller extends Controller
 
     public function getadmin()
     {
-        return view('admin.sanpham');
+        return view('admin.login');
     }
 
     public function getdslh()
     {
+       
         return view('admin.loaisp');
     }
 
@@ -59,9 +60,26 @@ class DoAn_Controller extends Controller
         return view('admin.themloaisp');
     }
 
+    public function postthemlh( Request $request)
+    {
+        $this->validate($request,
+            [
+                'name'=>'required|max:30'//min:3
+            ],
+            [
+                'name.request'=>'Bạn chưa nhập tên loại hoa',
+                'name.max'=>'Số kí tự không vượt quá 30'
+            ]);
+        $loaisp =new loaisp;
+        $loaisp->name=$request->name;
+        $loaisp->save();
+        return redirect('adminthemlh')->with('thongbao','Thêm thành công');
+    }
+
     public function getdsh()
     {
-        return view('admin.sanpham');
+        $dsh=sanpham::all();
+        return view('admin.sanpham',compact('dsh'));
     }
 
     public function getthemh()

@@ -19,6 +19,7 @@ route::Get('chitiet/{id}',['as'=>'chitietsp','uses'=>'DoAn_Controller@getchitiet
 route::Get('360qt69',['as'=>'admin','uses'=>'DoAn_Controller@getadmin']);////fix
 route::Get('admindslh',['as'=>'dslh','uses'=>'DoAn_Controller@getdslh']);//loại
 route::Get('adminthemlh',['as'=>'themlh','uses'=>'DoAn_Controller@getthemlh']);//loại
+route::post('adminthemlh',['as'=>'themlh','uses'=>'DoAn_Controller@postthemlh']);//loại
 route::Get('admindsh',['as'=>'dsh','uses'=>'DoAn_Controller@getdsh']);
 route::Get('adminthemh',['as'=>'themh','uses'=>'DoAn_Controller@getthemh']);
 route::Get('adminuser',['as'=>'dsus','uses'=>'DoAn_Controller@getuser']);
