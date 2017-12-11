@@ -30,8 +30,8 @@
 				<div class="pull-right auto-width-right">
 					<ul class="top-details menu-beta l-inline">
 						<li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-						<li><a href="signup.html">Đăng kí</a></li>
-						<li><a href="login.html">Đăng nhập</a></li>
+						<li><a href="#">Đăng kí</a></li>
+						<li><a href="#">Đăng nhập</a></li>
 					</ul>
 				</div>
 				<div class="clearfix"></div>
