@@ -40,7 +40,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
-                                <textarea class="form-control" rows="3" name="mota"></textarea>
+                                <textarea class="form-control" rows="3" name="mota">NULL</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Giá</label>
@@ -53,6 +53,10 @@
                             <div class="form-group">
                                 <label>Số lượng </label>
                                 <input class="form-control" name="soluong" placeholder="Nhập số lượng" />
+                            </div>
+                             <div class="form-group">
+                                <label>Tình trạng</label>
+                                <input class="form-control" name="new" placeholder="sản phẩm mới(1),sản phẩm hot(2)" />
                             </div>
                             <div class="form-group">
                                 <label>image</label>

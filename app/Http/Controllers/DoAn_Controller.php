@@ -92,11 +92,12 @@ class DoAn_Controller extends Controller
         $this->validate($request,
             [
                 'ten'=>'required|max:30',
-                'tenloai'=>'required|numeric',
+                'tenloai'=>'numeric',
                 'gia'=>'required|numeric',
                 'giakm'=>'numeric',
                 'soluong'=>'required|numeric',
-                'image' => 'required'
+                'image' => 'required',
+                'new'=>'required|numeric'
             ],
             [
                 'ten.required'=>'Bạn chưa nhập tên hoa',
@@ -110,16 +111,20 @@ class DoAn_Controller extends Controller
                 'soluong.digits'=>'số lượng phải là số',
                 //'image.dimensions'=>'Hình ảnh kích thước không hợp lệ',
                 'image.required'=>'Bạn chưa thêm hình ảnh',
+                'new.required'=>'Bạn chưa tình trạng',
+                'new.numeric'=>'Tình trạng phải là số',
             ]
         );
         $sp =new sanpham;
         $sp->name=$request->ten;
         $sp->idloai=$request->idloai;
+        $sp->description=$request->mota;
+        $sp->image=$request->image;
         $sp->gia=$request->gia;
         $sp->giakm=$request->giakm;
-        $sp->description=$request->mota;
         $sp->soluong=$request->soluong;
-        $sp->image=$request->image;
+        $sp->new=$request->new;
+        
         $sp->save();
         return redirect('adminthemh')->with('thongbao','Thêm thành công');
     }
