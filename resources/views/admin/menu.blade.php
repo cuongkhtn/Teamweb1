@@ -19,10 +19,10 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Loại hoa <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admindslh"> DS loại hoa</a>
+                                    <a href="../../admindslh"> DS loại hoa</a>
                                 </li>
                                 <li>
-                                    <a href="adminthemlh">Thêm loại hoa</a>
+                                    <a href="../../adminthemlh">Thêm loại hoa</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -31,10 +31,10 @@
                             <a href="#"><i class="fa fa-cube fa-fw"></i> Hoa<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admindsh">DS hoa</a>
+                                    <a href="../../admindsh">DS hoa</a>
                                 </li>
                                 <li>
-                                    <a href="adminthemh">Thêm hoa</a>
+                                    <a href="../../adminthemh">Thêm hoa</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -43,10 +43,10 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="adminuser">DS User</a>
+                                    <a href="../../adminuser">DS User</a>
                                 </li>
                                 <li>
-                                    <a href="adminthemuser">Thêm User</a>
+                                    <a href="../../adminthemuser">Thêm User</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

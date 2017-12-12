@@ -60,14 +60,47 @@ class DoAn_Controller extends Controller
         return view('admin.themloaisp');
     }
 
+    public function getxoalh($id)
+    {
+       $theloai=loaisp::find($id);
+       $theloai->delete();
+       return redirect('admindslh')->with('thongbao','Xóa thành công');
+    }
+
+    public function geteditlh($id)
+    {
+        $sp=loaisp::find($id);
+        return view('admin.editlsp',compact('sp'));
+    }
+
+      public function posteditlh(Request $request)
+    {
+        $theloai=loaisp::find($request->id);
+        $this->validate($request,
+            [
+                 'name'=>'required|max:30|unique:loaisp,name'//min:3
+            ],
+            [
+                 'name.required'=>'Bạn chưa nhập tên loại hoa',
+                'name.unique'=>'Tên loại hoa đã tồn tại',
+                'name.max'=>'Số kí tự không vượt quá 30'
+            ]
+        );
+        $theloai->name=$request->name;
+        $theloai->id=$request->id;
+        $theloai->save();
+        return redirect('admineditlh/'.$request->id)->with('thongbao','Thêm thành công');
+    }
+
     public function postthemlh( Request $request)
     {
         $this->validate($request,
             [
-                'name'=>'required|max:30'//min:3
+                'name'=>'required|max:30|unique:loaisp,name'//min:3
             ],
             [
                 'name.required'=>'Bạn chưa nhập tên loại hoa',
+                'name.unique'=>'Tên loại hoa đã tồn tại',
                 'name.max'=>'Số kí tự không vượt quá 30'
             ]);
         $loaisp =new loaisp;
@@ -82,6 +115,73 @@ class DoAn_Controller extends Controller
         return view('admin.sanpham',compact('dsh'));
     }
 
+    public function getedith($id)
+    {
+        $sp=sanpham::find($id);
+        return view('admin.editsp',compact('sp'));
+    }
+
+    public function postedith(Request $request,$id)
+    {
+        $sanpham=sanpham::find($id);
+        $this->validate($request,
+            [
+                'ten'=>'required|max:30',
+                'tenloai'=>'numeric',
+                'gia'=>'required|numeric',
+                'giakm'=>'numeric',
+                'soluong'=>'required|numeric',
+                'new'=>'required|numeric'
+            ],
+            [
+                'ten.required'=>'Bạn chưa nhập tên hoa',
+                'ten.max'=>'Số kí tự không vượt quá 30',
+                'tenloai.required'=>'Bạn chưa id loại hoa',
+                'tenloai.numeric'=>'ID phải là số',
+                'gia.required'=>'Bạn chưa nhập giá ',
+                'gia.numeric'=>'Giá phải là số',
+                'giakm.digits'=>'Giá khuyến mãi phải là số',
+                'soluong.required'=>'Bạn chưa nhập số lượng',
+                'soluong.digits'=>'số lượng phải là số',
+                //'Hinh.dimensions'=>'Hình ảnh kích thước không hợp lệ',
+                'new.required'=>'Bạn chưa tình trạng',
+                'new.numeric'=>'Tình trạng phải là số',
+            ]
+        );
+        $sanpham->id=$request->id;
+        $sanpham->name=$request->ten;
+        $sanpham->idloai=$request->idloai;
+        $sanpham->description=$request->mota;
+        if($request->hasFile('Hinh'))
+        {
+            $file=$request->File('Hinh');
+            $duoi=$file->getClientOriginalExtension();
+            if($duoi != 'jpg' && $duoi != 'png')
+            {
+                return redirect('admindsh')->with('loi','Chỉ được chọn hình ảnh có đuôi jpg,png');
+            }
+            $name=$file->getClientOriginalName();
+            $tenhinh=str_random(4)."_".$name;
+            while(file_exists("image/product".$tenhinh))
+            {
+                $tenhinh=str_random(4)."_".$name;
+            }
+            $file->move("qt69admin/image/product",$tenhinh);
+            $sp->image=$tenhinh;
+        }
+        else
+        {
+            $sanpham->image="";
+        }
+        $sanpham->gia=$request->gia;
+        $sanpham->giakm=$request->giakm;
+        $sanpham->soluong=$request->soluong;
+        $sanpham->new=$request->new;
+       
+        
+        $sanpham->save();
+        return redirect('admindsh')->with('thongbao','Update thành công');
+    }
     public function getthemh()
     {
         return view('admin.themsp');
@@ -96,7 +196,7 @@ class DoAn_Controller extends Controller
                 'gia'=>'required|numeric',
                 'giakm'=>'numeric',
                 'soluong'=>'required|numeric',
-                'image' => 'required',
+                'Hinh' => 'required',
                 'new'=>'required|numeric'
             ],
             [
@@ -109,8 +209,8 @@ class DoAn_Controller extends Controller
                 'giakm.digits'=>'Giá khuyến mãi phải là số',
                 'soluong.required'=>'Bạn chưa nhập số lượng',
                 'soluong.digits'=>'số lượng phải là số',
-                //'image.dimensions'=>'Hình ảnh kích thước không hợp lệ',
-                'image.required'=>'Bạn chưa thêm hình ảnh',
+                //'Hinh.dimensions'=>'Hình ảnh kích thước không hợp lệ',
+                'Hinh.required'=>'Bạn chưa thêm hình ảnh',
                 'new.required'=>'Bạn chưa tình trạng',
                 'new.numeric'=>'Tình trạng phải là số',
             ]
@@ -119,16 +219,44 @@ class DoAn_Controller extends Controller
         $sp->name=$request->ten;
         $sp->idloai=$request->idloai;
         $sp->description=$request->mota;
-        $sp->image=$request->image;
+        if($request->hasFile('Hinh'))
+        {
+            $file=$request->File('Hinh');
+            $duoi=$file->getClientOriginalExtension();
+            if($duoi != 'jpg' && $duoi != 'png')
+            {
+                return redirect('adminthemh')->with('loi','Chỉ được chọn hình ảnh có đuôi jpg,png');
+            }
+            $name=$file->getClientOriginalName();
+            $tenhinh=str_random(4)."_".$name;
+            while(file_exists("image/product".$tenhinh))
+            {
+                $tenhinh=str_random(4)."_".$name;
+            }
+            $file->move("qt69admin/image/product",$tenhinh);
+            $sp->image=$tenhinh;
+        }
+        else
+        {
+            $sp->image="";
+        }
         $sp->gia=$request->gia;
         $sp->giakm=$request->giakm;
         $sp->soluong=$request->soluong;
         $sp->new=$request->new;
+       
         
         $sp->save();
         return redirect('adminthemh')->with('thongbao','Thêm thành công');
     }
     
+    public function getxoah($id)
+    {
+       $theloai=sanpham::find($id);
+       $theloai->delete();
+       return redirect('admindsh')->with('thongbao','Xóa thành công');
+    }
+
     public function getuser()
     {
         return view('admin.user');

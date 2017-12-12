@@ -9,6 +9,12 @@
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
+                     <div class="col-lg-12" style="padding-bottom:120px">
+                            @if(session('thongbao'))
+                                <div class="alert alert-success">
+                                    {{session('thongbao')}}
+                                </div>
+                             @endif        
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr align="center">
@@ -34,8 +40,8 @@
                                 <td>{{$dsh->gia}}</td>
                                 <td>{{$dsh->giakm}}</td>
                                 <td>{{$dsh->soluong}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('dehg',$dsh->id)}}"> Delete</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('edithg',$dsh->id)}}">Edit</a></td>
                             </tr>
                             @else
                             <tr class="even gradeC" align="center">
@@ -46,13 +52,14 @@
                                 <td>{{$dsh->gia}}</td>
                                 <td>{{$dsh->giakm}}</td>
                                 <td>{{$dsh->soluong}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('dehg',$dsh->id)}}"> Delete</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('edithg',$dsh->id)}}">Edit</a></td>
                             </tr>
                             @endif
                             @endforeach
                         </tbody>
                     </table>
+                </div>
                 </div>
                 <!-- /.row -->
             </div>

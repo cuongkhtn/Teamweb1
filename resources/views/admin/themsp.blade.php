@@ -22,7 +22,12 @@
                                 {{session('thongbao')}}
                             </div>
                         @endif
-                        <form action="adminthemh" method="POST">
+                         @if(session('loi'))
+                            <div class="alert alert-success">
+                                {{session('loi')}}
+                            </div>
+                        @endif
+                        <form action="adminthemh" method="POST" enctype="multipart/form-data">
                              <input type="hidden" name="_token" value="{{ csrf_token() }}" /><!--  Kỹ thuật tấn công CSRF là gì? (https://freetuts.net/ky-thuat-tan-cong-csrf-va-cach-chong-csrf-106.html) -->
                             <div class="form-group">
                                 <label>Tên</label>
@@ -60,7 +65,7 @@
                             </div>
                             <div class="form-group">
                                 <label>image</label>
-                                <input type="file" name="image">
+                                <input type="file" name="Hinh">
                             </div>
                             <br>
                             <br>
