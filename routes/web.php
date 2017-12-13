@@ -36,3 +36,8 @@ route::Get('adminxoah/{id}',['as'=>'dehg','uses'=>'DoAn_Controller@getxoah']);
 
 route::Get('adminuser',['as'=>'dsus','uses'=>'DoAn_Controller@getuser']);//get user *** admin
 route::Get('adminthemuser',['as'=>'themus','uses'=>'DoAn_Controller@getthemuser']);// thêm user *** admin
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::Get('dang-nhap', 'ShopHoaController@getTrangDangNhap'); //View Trang Dang Nhap
+
+Route::Get('dang-ki', 'ShopHoaController@getTrangDangKi'); // View TrangDangKi
