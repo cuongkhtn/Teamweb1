@@ -800,7 +800,7 @@ strong {
 color:#000
 }
 
-input[type="text"],input[type="email"],input[type="url"],textarea {
+input[type="text"],input[type="email"],input[type="url"],input[type="Password"],textarea {
 width:100%;
 border:1px solid #e1e1e1;
 height:37px;
@@ -2755,6 +2755,7 @@ padding:15px 35px
 background:#fff;
 z-index:2;
 border-bottom:1px solid #fff
+
 }
 
 .woocommerce-tabs .panel {
@@ -2762,6 +2763,7 @@ margin:0 0 2em;
 padding:30px 30px 20px;
 border:1px solid #f6f6f6;
 border-radius:0
+
 }
 
 table.shop_attributes {

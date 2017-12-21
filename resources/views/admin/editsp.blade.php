@@ -67,6 +67,56 @@
                     </div>
                 </div>
                 <!-- /.row -->
+                <!-- /.row -->
+                <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Comment
+                    <small>Danh sách</small>
+                </h1>
+            </div>
+            <!-- /.col-lg-12 -->
+
+            @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $lc)
+                {{$lc}}<br>
+                @endforeach
+            </div>
+            @endif 
+
+            @if(session('thongbao'))
+            <div class="alert alert-success">
+                {{session('thongbao')}}
+            </div>
+            @endif
+            
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr align="center">
+                        <th>ID</th>
+                        <th>Người dùng</th>
+                        <th>Nội Dung</th>
+                        <th>Thời gian</th>                       
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach($sp->comment as $cmt)
+                    <tr class="odd gradeX" align="center">
+                        <td>{{$cmt->id}}</td>
+                        <td>
+                            {{$cmt->user->name}}
+                        </td>
+                        <td>{{$cmt->NoiDung}}</td>
+                        <td>{{$cmt->created_at}}</td>
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="../../comment/xoa/{{$cmt->id}}">Delete</a></td>       
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
         </div>

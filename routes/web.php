@@ -16,9 +16,15 @@ route::Get('sp/{id}',['as'=>'san-pham','uses'=>'DoAn_Controller@getsp']);//get s
 route::Get('about',['as'=>'about','uses'=>'DoAn_Controller@getabout']);// get about
 route::Get('contacts',['as'=>'contacts','uses'=>'DoAn_Controller@getcontacts']);//get contact
 route::Get('chitiet/{id}',['as'=>'chitietsp','uses'=>'DoAn_Controller@getchitietsp']);//get chi tiết
+route::get('login',['as'=>'login_index','uses'=>'DoAn_Controller@getlogin_index']);
+route::post('login',['as'=>'login_post','uses'=>'DoAn_Controller@postlogin']);
+route::get('Logoutindex','DoAn_Controller@getlogoutindex'); //log out 
+route::get('signup',['as'=>'signup_index','uses'=>'DoAn_Controller@getsignup_index']);
+route::post('signup',['as'=>'signup_idp','uses'=>'DoAn_Controller@postsignup_index']);
 
 
-route::Get('360qt69',['as'=>'admin','uses'=>'DoAn_Controller@getadmin']);//get login admin
+route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function()
+{
 route::Get('admindslh',['as'=>'dslh','uses'=>'DoAn_Controller@getdslh']);//get danh sách loại hoa ** admin
 route::Get('adminthemlh',['as'=>'themlhg','uses'=>'DoAn_Controller@getthemlh']);//get thêm loại hoa ** admin
 route::Get('adminxoalh/{id}',['as'=>'delhg','uses'=>'DoAn_Controller@getxoalh']);//get xóa loại hoa ** admin
@@ -36,3 +42,16 @@ route::Get('adminxoah/{id}',['as'=>'dehg','uses'=>'DoAn_Controller@getxoah']);
 
 route::Get('adminuser',['as'=>'dsus','uses'=>'DoAn_Controller@getuser']);//get user *** admin
 route::Get('adminthemuser',['as'=>'themus','uses'=>'DoAn_Controller@getthemuser']);// thêm user *** admin
+route::get('Logout','DoAn_Controller@getlogout'); //log out 
+
+});
+route::post('comment/{id}',['as'=>'cmt','uses'=>'comment_Controller@postcmt']);
+route::Get('360qt69',['as'=>'admin','uses'=>'DoAn_Controller@getadmin']);//get login admin
+route::post('360qt69',['as'=>'admin','uses'=>'DoAn_Controller@postadmin']);//get login admin
+
+ route::group(['prefix'=>'comment','middleware'=>'adminlogin'],function()
+{
+	route::Get('xoa/{id}',['as'=>'xoacmt','uses'=>'comment_Controller@getxoa']);
+
+	
+});

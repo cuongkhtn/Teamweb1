@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\slide;
 use App\sanpham;
 use App\loaisp;
+use App\User;
+use App\comment;
+use Hash;
 
 class DoAn_Controller extends Controller
 {
@@ -18,6 +22,7 @@ class DoAn_Controller extends Controller
     	return view('trangchu',compact('slide','spkm','sanphamc','spkmc'));
         
     }
+
     public function getsp($sp)
     {
         $trangsp =sanpham::where('idloai',$sp)->paginate(9);
@@ -25,6 +30,62 @@ class DoAn_Controller extends Controller
         $namesp =loaisp::where('id',$sp)->first();
     	return view('sanpham',compact('trangsp','namesp','trangsp1'));
     }
+
+    public function getlogin_index()
+    {
+        return view('login_index');
+    }
+
+     public function postlogin(Request $request)
+    {
+        $this->validate($request,
+            [
+                //'g-recaptcha-response' => 'required',
+            ],
+            [
+                //'g-recaptcha-response.required'=>'check you is not robot !'
+            ]);
+        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
+           {
+             return redirect('../'); 
+           }
+        else
+        {
+            return redirect('login')->with('thongbao','Đăng nhập không thành công');
+        }
+    }
+
+    public function getsignup_index()
+    {
+        return view('signup');
+    }
+
+     public function postsignup_index(Request $request)
+    {
+        $this->validate($request,
+            [
+                'email'=>'unique:users,email',//min:3
+                're_password'=>'same:password',
+                'g-recaptcha-response' => 'required'
+            ],
+            [
+                'email.unique'=>'email đã tồn tại',
+                're_password.same'=>'Mật khẩu không trùng nhau',
+                'g-recaptcha-response.required'=>'check you is not robot !'
+
+            ]
+        );
+        $user=new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->phone=$request->phone;
+        $user->address=$request->address;
+        $user->loaiuser=2;
+        $user->save();
+         return redirect('login')->with('thongbao','Đăng kí thành công')->withinput();
+    }
+
     public function getabout()
     {
     	return view('about');
@@ -48,7 +109,6 @@ class DoAn_Controller extends Controller
     {
         return view('admin.login');
     }
-
     public function getdslh()
     {
        
@@ -266,4 +326,43 @@ class DoAn_Controller extends Controller
     {
         return view('admin.them_user');
     }
+
+// ----------------
+    public function postadmin(Request $request)
+    {
+        $this->validate($request,
+            [
+                'email'=>'required',
+                'password'=>'required'
+            ],
+            [
+                'email.required'=>'Bạn chưa nhập email',
+                'password.required'=>'Bạn chưa nhập password'
+            ]);
+        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
+            {
+                return redirect('admin/admindslh');
+            }
+        else
+        {
+            return redirect('360qt69')->with('thongbao','Đăng nhập không thành công');
+        }
+    }
+    
+    public function getlogout()
+    {
+        Auth::logout();
+        // Session::flush();
+        return redirect('360qt69');
+    }
+
+     public function getlogoutindex()
+    {
+         Auth::logout();
+         // Session::flush();
+        return redirect('/');
+    }
+
 }
+
+

@@ -15,25 +15,38 @@
 	<link rel="stylesheet" href="qt69admin/assets/dest/css/animate.css">
 	<link rel="stylesheet" title="style" href="qt69admin/assets/dest/css/huong-style.css">
 	<link rel="stylesheet" title="style" href="qt69admin/assets/dest/css/style.css">
+   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	
 </head>
 <body>
 	
 	<div id="header">
 		<div class="header-top">
 			<div class="container">
+
 				<div class="pull-left auto-width-left">
 					<ul class="top-menu menu-beta l-inline">
 						<li><a href=""><i class="fa fa-home"></i> 227 Nguyễn Văn Cừ, Phường 4, Quận 5</a></li>
 						<li><a href=""><i class="fa fa-phone"></i> 0165 723 5365</a></li>
 					</ul>
 				</div>
+				 @if(Auth::check())
+				<div class="pull-right auto-width-right">
+					<ul class="top-details menu-beta l-inline">
+						<li><a href="#"><i class="fa fa-user"></i>{{Auth::user()->name}}</a></li>
+						<li><a href="#">Thông tin</a></li>
+						<li><a href="Logoutindex">Thoát</a></li>
+					</ul>
+				</div>
+				@else
 				<div class="pull-right auto-width-right">
 					<ul class="top-details menu-beta l-inline">
 						<li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-						<li><a href="#">Đăng kí</a></li>
-						<li><a href="#">Đăng nhập</a></li>
+						<li><a href="signup">Đăng kí</a></li>
+						<li><a href="login">Đăng nhập</a></li>
 					</ul>
 				</div>
+				 @endif
 				<div class="clearfix"></div>
 			</div> <!-- .container -->
 		</div> <!-- .header-top -->
@@ -220,6 +233,16 @@
 			}}
 		)
 	})
+	
 	</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=1995906300690974';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>
