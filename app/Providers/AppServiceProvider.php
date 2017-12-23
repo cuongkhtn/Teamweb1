@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
                  $menu=loaisp::all();
                  $mn->with('menu',$menu);//tên truyền và giá trị truyền
             });
-        view()->composer(['trangchu','chitietsp'],function($sanphamtop)
+        view()->composer(['trangchu','chitietsp','master'],function($sanphamtop)
         {
             
             $sanpham = sanpham::where('new',1)->paginate(4);//phân trang (paginate),get()

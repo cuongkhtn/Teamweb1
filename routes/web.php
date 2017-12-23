@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +9,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/',['as'=>'trang-chu', 'uses'=>'DoAn_Controller@getindex']);//get index
 route::Get('sp/{id}',['as'=>'san-pham','uses'=>'DoAn_Controller@getsp']);//get sản phẩm
 route::Get('about',['as'=>'about','uses'=>'DoAn_Controller@getabout']);// get about
@@ -21,8 +19,6 @@ route::post('login',['as'=>'login_post','uses'=>'DoAn_Controller@postlogin']);
 route::get('Logoutindex','DoAn_Controller@getlogoutindex'); //log out 
 route::get('signup',['as'=>'signup_index','uses'=>'DoAn_Controller@getsignup_index']);
 route::post('signup',['as'=>'signup_idp','uses'=>'DoAn_Controller@postsignup_index']);
-
-
 route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function()
 {
 route::Get('admindslh',['as'=>'dslh','uses'=>'DoAn_Controller@getdslh']);//get danh sách loại hoa ** admin
@@ -31,7 +27,6 @@ route::Get('adminxoalh/{id}',['as'=>'delhg','uses'=>'DoAn_Controller@getxoalh'])
 route::post('adminthemlh',['as'=>'themlhp','uses'=>'DoAn_Controller@postthemlh']);//post thêm loại hoa** admin
 route::Get('admineditlh/{id}',['as'=>'editlhg','uses'=>'DoAn_Controller@geteditlh']);//get edit loại hoa ** admin
 route::post('admineditlh/{id}',['as'=>'editlhb','uses'=>'DoAn_Controller@posteditlh']);//post edit loại hoa ** admin
-
 route::Get('admindsh',['as'=>'dsh','uses'=>'DoAn_Controller@getdsh']);//get danh sách hoa * admin
 route::Get('adminthemh',['as'=>'themhg','uses'=>'DoAn_Controller@getthemh']);//get thêm hoa * admin
 route::Post('adminthemh',['as'=>'themhp','uses'=>'DoAn_Controller@postthemh']);//post thêm hoa * admin
@@ -39,19 +34,15 @@ route::Post('adminthemh',['as'=>'themhp','uses'=>'DoAn_Controller@postthemh']);/
 route::Get('adminedith/{id}',['as'=>'edithg','uses'=>'DoAn_Controller@getedith']);//get edit hoa ** 
 route::post('adminedith/{id}',['as'=>'edithb','uses'=>'DoAn_Controller@postedith']);//post edit loại hoa ** admin
 route::Get('adminxoah/{id}',['as'=>'dehg','uses'=>'DoAn_Controller@getxoah']);
-
 route::Get('adminuser',['as'=>'dsus','uses'=>'DoAn_Controller@getuser']);//get user *** admin
 route::Get('adminthemuser',['as'=>'themus','uses'=>'DoAn_Controller@getthemuser']);// thêm user *** admin
 route::get('Logout','DoAn_Controller@getlogout'); //log out 
-
 });
 route::post('comment/{id}',['as'=>'cmt','uses'=>'comment_Controller@postcmt']);
 route::Get('360qt69',['as'=>'admin','uses'=>'DoAn_Controller@getadmin']);//get login admin
 route::post('360qt69',['as'=>'admin','uses'=>'DoAn_Controller@postadmin']);//get login admin
-
  route::group(['prefix'=>'comment','middleware'=>'adminlogin'],function()
 {
 	route::Get('xoa/{id}',['as'=>'xoacmt','uses'=>'comment_Controller@getxoa']);
-
-	
+	route::post('comment/{id}',['as'=>'cmt','uses'=>'comment_Controller@postcmt']);
 });
