@@ -10,6 +10,7 @@ use App\loaisp;
 use App\User;
 use App\comment;
 use Hash;
+use Mail;
 
 class DoAn_Controller extends Controller
 {
@@ -45,7 +46,7 @@ class DoAn_Controller extends Controller
             [
                 //'g-recaptcha-response.required'=>'check you is not robot !'
             ]);
-        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
+        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password, 'confirmed' => 1]))
            {
              return redirect('../'); 
            }
@@ -66,15 +67,16 @@ class DoAn_Controller extends Controller
             [
                 'email'=>'unique:users,email',//min:3
                 're_password'=>'same:password',
-                'g-recaptcha-response' => 'required'
+                // 'g-recaptcha-response' => 'required'
             ],
             [
                 'email.unique'=>'email đã tồn tại',
                 're_password.same'=>'Mật khẩu không trùng nhau',
-                'g-recaptcha-response.required'=>'check you is not robot !'
+                // 'g-recaptcha-response.required'=>'check you is not robot !'
 
             ]
         );
+        $confirmation_code = time().uniqid(true);
         $user=new User();
         $user->name=$request->name;
         $user->email=$request->email;
@@ -82,8 +84,32 @@ class DoAn_Controller extends Controller
         $user->phone=$request->phone;
         $user->address=$request->address;
         $user->loaiuser=2;
+        $user->confirmed=0;
+        $user->confirmation_code = $confirmation_code;
         $user->save();
-         return redirect('login')->with('thongbao','Đăng kí thành công')->withinput();
+        Mail::send('verify', ['confirmation_code'=>$confirmation_code], function($message) use ($request) {
+            $message->from('cuonganh365@gmail.com','ShopHoa360');
+             $message->to( $request->email,$request->name)   
+                ->subject('Confirm your account on ShopHoa360 ');
+        });
+         return redirect('login')->with('thongbao','Vui lòng xác nhận tài khoản email')->withinput();
+    }
+
+    public function verify($code)
+    {
+        $user = User::where('confirmation_code', $code);
+
+        if ($user->count() > 0) {
+            $user->update([
+                'confirmed' => 1,
+                'confirmation_code' => null
+            ]);
+            $notification_status = 'Bạn đã xác nhận thành công';
+        } else {
+            $notification_status ='Mã xác nhận không chính xác';
+        }
+
+        return redirect(route('login_index'))->with('status', $notification_status);
     }
 
     public function getabout()
@@ -97,12 +123,13 @@ class DoAn_Controller extends Controller
          public function getchitietsp($sp)
     {
         $chitiet=sanpham::where('id',$sp)->first();
+        $comment = comment::where('idhoa',$sp)->paginate(4);
         $sptt=sanpham::where([
             ['idloai',$chitiet['idloai']],
             ['id','<>',$chitiet['id']],
             ])->inRandomOrder()->paginate(3);
         $topsp = sanpham::where('new',2)->paginate(3);
-        return view('chitietsp',compact('chitiet','sptt','topsp'));
+        return view('chitietsp',compact('chitiet','sptt','topsp','comment'));
     }
 
     public function getadmin()
@@ -363,6 +390,18 @@ class DoAn_Controller extends Controller
         return redirect('/');
     }
 
+    public function getsearch(Request $request)
+    {
+        $search=sanpham::where('name','like','%'.$request->search.'%')->paginate(9);
+        $search1=sanpham::where('name','like','%'.$request->search.'%')->get();
+        return view('search',compact('search','search1'));
+    }
+    public function getsearch1(Request $request)
+    {
+         $search=sanpham::where([['name','like','%'.$request->input1.'%'],['giakm','>',$request->input2.'%'],['giakm','<',$request->input3.'%'],['giakm','<>','0'],])->orwhere([['name','like','%'.$request->input1.'%'],['gia','>',$request->input2.'%'],['gia','<',$request->input3.'%'],['giakm','0'],])->paginate(9);
+         $search1=sanpham::where([['name','like','%'.$request->input1.'%'],['giakm','>',$request->input2.'%'],['giakm','<',$request->input3.'%'],['giakm','<>','0'],])->orwhere([['name','like','%'.$request->input1.'%'],['gia','>',$request->input2.'%'],['gia','<',$request->input3.'%'],['giakm','0'],])->get();
+        return view('search',compact('search','search1'));
+    }
 }
 
 

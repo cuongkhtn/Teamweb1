@@ -14,11 +14,14 @@ route::Get('sp/{id}',['as'=>'san-pham','uses'=>'DoAn_Controller@getsp']);//get s
 route::Get('about',['as'=>'about','uses'=>'DoAn_Controller@getabout']);// get about
 route::Get('contacts',['as'=>'contacts','uses'=>'DoAn_Controller@getcontacts']);//get contact
 route::Get('chitiet/{id}',['as'=>'chitietsp','uses'=>'DoAn_Controller@getchitietsp']);//get chi tiết
+route::get('search',['as'=>'search','uses'=>'DoAn_Controller@getsearch']);
+route::get('search1',['as'=>'search1','uses'=>'DoAn_Controller@getsearch1']);
 route::get('login',['as'=>'login_index','uses'=>'DoAn_Controller@getlogin_index']);
 route::post('login',['as'=>'login_post','uses'=>'DoAn_Controller@postlogin']);
 route::get('Logoutindex','DoAn_Controller@getlogoutindex'); //log out 
 route::get('signup',['as'=>'signup_index','uses'=>'DoAn_Controller@getsignup_index']);
 route::post('signup',['as'=>'signup_idp','uses'=>'DoAn_Controller@postsignup_index']);
+Route::get('register/verify/{code}',['as'=>'xacnhanlogin','uses'=>'DoAn_Controller@verify']);
 route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function()
 {
 route::Get('admindslh',['as'=>'dslh','uses'=>'DoAn_Controller@getdslh']);//get danh sách loại hoa ** admin

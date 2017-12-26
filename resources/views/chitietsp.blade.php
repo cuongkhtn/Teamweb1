@@ -130,7 +130,7 @@
 					<br>
 				 @endif
                 <!-- Comment -->
-                @foreach($chitiet->comment as $cmt)
+                @foreach($comment as $cmt)
                 <div class="media" id="data">
                 	@if($cmt->user->loaiuser != 1)
                     <a class="pull-left">
@@ -150,6 +150,8 @@
                     </div>
                 </div>
 				@endforeach
+				<div>{{$comment->links()}}</div>
+				<!-- <td><button type="button" name="btn_more" data-vid="<>" id="btn_more" class="btn btn-success form-control">more</button></td>   -->
                 <!-- Comment -->
               
 					</div>
@@ -211,5 +213,5 @@
 	 <!-- 	<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="900" data-numposts="5"></div> -->
 		<br><br>
 	</div> <!-- .container -->
-	
+
 @endsection

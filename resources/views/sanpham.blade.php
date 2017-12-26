@@ -6,13 +6,40 @@
 			<div class="main-content">
 				<div class="space60">&nbsp;</div>
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-3" >
+
 						<ul class="aside-menu">
 							@foreach($menu as $nsp)
 							<li><a href="{{route('san-pham',$nsp->id)}}">{{$nsp->name}}</a></li>
 							@endforeach
 						</ul>
-					</div>
+						<br>
+						<br>
+						<form action="search1" method="GET">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<h3 class="header" style="background-color: #0277b8;;border-radius: 4px;color: white;font-size: 17px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tư vấn chọn hoa</h3>
+						<div class="body" style="border: solid 1px #0277b8;padding:10px;">
+							<span class="filter-title" style="font-size: 12px;font-weight:bold;">Chủ đề</span>
+							<div class="filter-criteria" style="padding:5px,3px;">
+							
+							 <input class="form-control" name="input1" />
+ 
+							</div>
+							<span class="filter-title"  style="font-size: 12px;font-weight:bold;margin-bottom:5px">Mức giá</span>
+							<div class="filter-criteria"  style="padding:5px,3px;height: 28px">
+								<input class="form-control" name="input2" placeholder="Giá Thấp nhất"  />
+							</div>
+							&nbsp;
+							<div class="filter-criteria"  style="padding:5px,3px;height: 28px">
+								<input class="form-control" name="input3" placeholder="Giá cao nhất" />
+							</div>
+							<span class="description"><br>* Bạn có thể gọi nhanh cho chúng tôi theo số 0165 723 53 65 để đặt hoa theo thiết kế riêng</span>
+							<div class="button-bar text-center">
+							<input type="submit" class="btn btn-primary" value="Gửi">
+							</div>
+							</div>
+						</div>
+						</form>
 					<div class="col-sm-9">
 						<div class="beta-products-list" >
 							<h4>{{$namesp->name}}</h4>
@@ -29,7 +56,7 @@
 										<a href="{{route('chitietsp',$tsp->id)}}"><img src="qt69admin/image/product/{{$tsp->image}}" alt="cường đẹp trai =)))"  height="243px" width="100%"></a>
 									</div>
 									<div class="single-item-body">
-										<p class="single-item-price">
+										<p class="single-item-price" style="font-size: 19px">
 											@if($tsp -> giakm!=0)
 													<span class="flash-del">{{$tsp->gia}} VND</span>
 													<span class="flash-sale">{{$tsp->giakm}} VND</span>

@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('phone',21);
             $table->string('address',255);
             $table->integer('loaiuser');
+            $table->boolean('confirmed')->default(0);
+            $table->string('confirmation_code')->nullable();
             $table->string('remember_token',255);
             $table->timestamps();
         });
