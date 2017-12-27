@@ -112,6 +112,56 @@ class DoAn_Controller extends Controller
         return redirect(route('login_index'))->with('status', $notification_status);
     }
 
+    public function getthongtin()
+    {
+        return view('thongtin');
+    }
+    public function postthongtin(Request $request,$id)
+    {
+         $this->validate($request,
+            [
+                'name'=>'required',
+                'address'=>'required',
+                'phone'=>'required',
+                
+            ],
+            [
+                 'name.required'=>'Bạn chưa nhập tên',
+                 'address.required'=>'Bạn chưa nhập địa chỉ',
+                 'phone.required'=>'Bạn chưa nhập số điện thoại',
+                 
+            ]);
+        if($request->oldpass || $request->password_1 || $request->password_2 != null)
+            {
+                 $this->validate($request,
+                    [
+                        'oldpass'=>'required',
+                        'password_1'=>'required',
+                        'password_2'=>'required',
+                        'password_2'=>'same:password_1',
+                    ],
+                    [
+                         'oldpass.required'=>'Nhập lại mật khẩu cũ khi đổi mật khẩu',
+                         'password_1.required'=>'Không được bỏ trống mật khẩu mới',
+                         'password_2.required'=>'Không được bỏ trống xác nhận mật khẩu',
+                         'password_2.same'=>'Mật khẩu không trùng nhau',
+                    ]);
+                   if(Auth::attempt(['password'=> $request->oldpass,'id'=>$id]))
+                       {
+                          $update=user::where('id',$id)->update(['name'=>$request->name,'address'=>$request->address,'phone'=>$request->phone,'password'=>Hash::make($request->password_1)]);
+                       }
+                    else
+                    {
+                        return redirect('thongtin/'.$request->id)->with('thongbao','Sai mật khẩu');
+                    }
+            }
+        else
+            {
+                $update=user::where('id',$id)->update(['name'=>$request->name,'address'=>$request->address,'phone'=>$request->phone]);
+            }
+        return redirect('thongtin/'.$request->id)->with('thongbao','Update thành công');
+        
+    }
     public function getabout()
     {
     	return view('about');

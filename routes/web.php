@@ -22,6 +22,8 @@ route::get('Logoutindex','DoAn_Controller@getlogoutindex'); //log out
 route::get('signup',['as'=>'signup_index','uses'=>'DoAn_Controller@getsignup_index']);
 route::post('signup',['as'=>'signup_idp','uses'=>'DoAn_Controller@postsignup_index']);
 Route::get('register/verify/{code}',['as'=>'xacnhanlogin','uses'=>'DoAn_Controller@verify']);
+Route::get('thongtin/{id}',['as'=>'thongtin','uses'=>'DoAn_Controller@getthongtin']);
+Route::post('thongtin/{id}',['as'=>'thongtin','uses'=>'DoAn_Controller@postthongtin']);
 route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function()
 {
 route::Get('admindslh',['as'=>'dslh','uses'=>'DoAn_Controller@getdslh']);//get danh sách loại hoa ** admin

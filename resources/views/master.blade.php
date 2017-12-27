@@ -35,7 +35,7 @@
 				<div class="pull-right auto-width-right">
 					<ul class="top-details menu-beta l-inline">
 						<li><a href="#"><i class="fa fa-user"></i>{{Auth::user()->name}}</a></li>
-						<li><a href="#">Thông tin</a></li>
+						<li><a href="{{route('thongtin',Auth::user()->id)}}">&nbsp;Cài đặt&nbsp;</a></li>
 						<li><a href="Logoutindex">Thoát</a></li>
 					</ul>
 				</div>
