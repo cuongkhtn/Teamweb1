@@ -19,7 +19,7 @@
 	<base href="{{asset('')}}">
 
 </head>
-<body>
+<body >
 	
 	<div id="header">
 		<div class="header-top">
@@ -65,60 +65,26 @@
 					        <button class="fa fa-search" type="submit" id="searchsubmit"></button>
 						</form>
 					</div>
-
+					@if(Auth::check())
 					<div class="beta-comp">
 						<div class="cart">
-							<div class="beta-select"><i class="fa fa-shopping-cart"></i> Giỏ hàng (Trống) <i class="fa fa-chevron-down"></i></div>
-							<div class="beta-dropdown cart-body">
-								<div class="cart-item">
-									<div class="media">
-										<a class="pull-left" href="#"><img src="qt69admin/assets/dest/images/products/cart/1.png" alt=""></a>
-										<div class="media-body">
-											<span class="cart-item-title">Sample Woman Top</span>
-											<span class="cart-item-options">Size: XS; Colar: Navy</span>
-											<span class="cart-item-amount">1*<span>$49.50</span></span>
-										</div>
-									</div>
-								</div>
-
-								<div class="cart-item">
-									<div class="media">
-										<a class="pull-left" href="#"><img src="qt69admin/assets/dest/images/products/cart/2.png" alt=""></a>
-										<div class="media-body">
-											<span class="cart-item-title">Sample Woman Top</span>
-											<span class="cart-item-options">Size: XS; Colar: Navy</span>
-											<span class="cart-item-amount">1*<span>$49.50</span></span>
-										</div>
-									</div>
-								</div>
-
-								<div class="cart-item">
-									<div class="media">
-										<a class="pull-left" href="#"><img src="qt69admin/assets/dest/images/products/cart/3.png" alt=""></a>
-										<div class="media-body">
-											<span class="cart-item-title">Sample Woman Top</span>
-											<span class="cart-item-options">Size: XS; Colar: Navy</span>
-											<span class="cart-item-amount">1*<span>$49.50</span></span>
-										</div>
-									</div>
-								</div>
-
-								<div class="cart-caption">
-									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">$34.55</span></div>
-									<div class="clearfix"></div>
-
-									<div class="center">
-										<div class="space10">&nbsp;</div>
-										<a href="checkout.html" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
-									</div>
-								</div>
-							</div>
+							<a href="{{route('getgiohang',Auth::user()->id)}}" class="beta-select"><i class="fa fa-shopping-cart">
+							</i><a href="{{route('getgiohang',Auth::user()->id)}}"> Giỏ hàng <span style="background-color: orange">{{count($cart2)}}</span></a><i ></i>
+							</a>
 						</div> <!-- .cart -->
 					</div>
+					@endif
 				</div>
 				<div class="clearfix"></div>
 			</div> <!-- .container -->
 		</div> <!-- .header-body -->
+		@if(Auth::check())
+			@if(session('thongbao'))
+				<div class="alert alert-success" style="padding-left: 100px" id="hide" >
+					{{session('thongbao')}} 
+				</div>
+			@endif
+		@endif
 		<div class="header-bottom" style="background-color: #0277b8;">
 			<div class="container">
 				<a class="visible-xs beta-menu-toggle pull-right" href="#"><span class='beta-menu-toggle-text'>Menu</span> <i class="fa fa-bars"></i></a>
@@ -211,24 +177,24 @@
 
 
 	<!-- include js files -->
-
+	<script src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
 	<script src="qt69admin/assets/dest/js/jquery.js"></script>
 	<script src="qt69admin/assets/dest/vendors/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-	<script src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script> 
 	<script src="qt69admin/assets/dest/vendors/bxslider/jquery.bxslider.min.js"></script>
 	<script src="qt69admin/assets/dest/vendors/colorbox/jquery.colorbox-min.js"></script>
 	<script src="qt69admin/assets/dest/vendors/animo/Animo.js"></script>
 	<script src="qt69admin/assets/dest/vendors/dug/dug.js"></script>
-<!-- 	<script src="qt69admin/assets/dest/js/scripts.min.js"></script> -->
 	<script src="qt69admin/assets/dest/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
 	<script src="qt69admin/assets/dest/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-	<!-- <script src="qt69admin/assets/dest/js/waypoints.min.js"></script> -->
+	<script src="qt69admin/assets/dest/js/scripts.min.js"></script>
+	<script src="qt69admin/assets/dest/js/waypoints.min.js"></script>
 	<script src="qt69admin/assets/dest/js/wow.min.js"></script>
 	<!--customjs-->
 	<script src="qt69admin/assets/dest/js/custom2.js"></script>
+
 	<script>
 	$(document).ready(function($) {    
 		$(window).scroll(function(){
@@ -251,6 +217,13 @@
               console.log(data)
         })
 	</script>
+	<script>
+$(document).ready(function(){
+    $("#hide").click(function(){
+        $("#hide").hide('fast');
+    });
+});
+</script>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];

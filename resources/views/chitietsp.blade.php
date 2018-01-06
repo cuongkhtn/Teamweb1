@@ -31,7 +31,8 @@
 								<p>Bó hoa cưới cầm tay Mùa Của Yêu Thương là sắc thắm của mùa hè, xanh, đỏ, cam, trắng tạo vẻ trẻ trung cho ngày cưới của bạn.</p>
 							</div>
 							<div class="space20">&nbsp;</div>
-
+							@if(Auth::check())
+							<form action="{{url('add/'.$chitiet->id.'/'.Auth::user()->id)}}">
 							<p>Tùy chọn:</p>
 							<div class="single-item-options">
 								<select class="wc-select" name="color">
@@ -42,9 +43,26 @@
 									<option value="4">4</option>
 									<option value="5">5</option>
 								</select>
-								<a class="add-to-cart" href="chitiet"><i class="fa fa-shopping-cart"></i></a>
+								<button class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
 								<div class="clearfix"></div>
 							</div>
+							</form>
+							@else
+							<p>Tùy chọn:</p>
+							<div class="single-item-options">
+								<select class="wc-select" name="color">
+									<option>Số lượng:</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+								<a href={{route('logincart')}} class="add-to-cart"><i class="fa fa-shopping-cart"  ></i></a>
+								<div class="clearfix"></div>
+							</div>
+							@endif
+
 						</div>
 					</div>
 
@@ -89,8 +107,12 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html"> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+											<a class="add-to-cart pull-left" href="#"><i class="fa fa-shopping-cart"></i></a>
+											 @if(Auth::check())
+											<a class="beta-btn primary" href="{{url('add/'.$sptt->id.'/'.Auth::user()->id)}}"> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+											@else
+											<a class="beta-btn primary" href={{route('logincart')}}> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+											@endif
 											<div class="clearfix"></div>
 											<br>
 											<br>

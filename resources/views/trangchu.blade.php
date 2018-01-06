@@ -57,14 +57,23 @@
 												@endif
 											</p>
 										</div>
-										
+										@if(Auth::check())
 										<div class="single-item-caption">
 											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="chitiet"> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+											<a class="beta-btn primary" href="{{url('add/'.$sp->id.'/'.Auth::user()->id)}}"> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 											<br>
 											<br>
 										</div>
+										@else
+										<div class="single-item-caption">
+											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href={{route('logincart')}}> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+											<div class="clearfix"></div>
+											<br>
+											<br>
+										</div>
+										@endif
 									</div>
 								</div>
 								@endforeach
@@ -100,13 +109,23 @@
 
 											</p>
 										</div>
+										@if(Auth::check())
 										<div class="single-item-caption">
 											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html"> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+											<a class="beta-btn primary" href="{{url('add/'.$sp->id.'/'.Auth::user()->id)}}""> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 											<br>
 											<br>
 										</div>
+										@else
+										<div class="single-item-caption">
+											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href={{route('logincart')}}> + Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+											<div class="clearfix"></div>
+											<br>
+											<br>
+										</div>
+										@endif
 									</div>
 								</div> <!-- .beta-products-list -->
 								@endforeach

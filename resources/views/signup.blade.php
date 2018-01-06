@@ -49,10 +49,12 @@
 							<label for="phone">Re password*</label>
 							<input type="password" name="re_password" required>
 						</div>
-						<div class="from-group">{!! Recaptcha::render() !!}</div>
-						<br>
+						<div class="form-block" style="border-bottom:1px solid #bfbfbf;height: 120px">
+						<label for="phone" style="line-height: 90px;font-weight:bold;">Xác nhận* </label>
+						<div class="from-group" >{!! Recaptcha::render() !!}</div>
+						</div>
 						<div class="form-block">
-							<button type="submit" id ="submit" class="btn btn-primary">Register</button>
+							<button type="submit" id ="submit" class="btn btn-primary" style="width: 550px">Register</button>
 						</div>
 					</div>
 					<div class="col-sm-3"></div>

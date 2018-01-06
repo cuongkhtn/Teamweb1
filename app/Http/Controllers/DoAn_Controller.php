@@ -8,9 +8,11 @@ use App\slide;
 use App\sanpham;
 use App\loaisp;
 use App\User;
+use App\shoppingcart;
 use App\comment;
 use Hash;
 use Mail;
+use Cart;
 
 class DoAn_Controller extends Controller
 {
@@ -173,7 +175,7 @@ class DoAn_Controller extends Controller
          public function getchitietsp($sp)
     {
         $chitiet=sanpham::where('id',$sp)->first();
-        $comment = comment::where('idhoa',$sp)->paginate(4);
+        $comment = comment::where('idhoa',$sp)->paginate(4);//nhiều
         $sptt=sanpham::where([
             ['idloai',$chitiet['idloai']],
             ['id','<>',$chitiet['id']],
@@ -451,6 +453,76 @@ class DoAn_Controller extends Controller
          $search=sanpham::where([['name','like','%'.$request->input1.'%'],['giakm','>',$request->input2.'%'],['giakm','<',$request->input3.'%'],['giakm','<>','0'],])->orwhere([['name','like','%'.$request->input1.'%'],['gia','>',$request->input2.'%'],['gia','<',$request->input3.'%'],['giakm','0'],])->paginate(9);
          $search1=sanpham::where([['name','like','%'.$request->input1.'%'],['giakm','>',$request->input2.'%'],['giakm','<',$request->input3.'%'],['giakm','<>','0'],])->orwhere([['name','like','%'.$request->input1.'%'],['gia','>',$request->input2.'%'],['gia','<',$request->input3.'%'],['giakm','0'],])->get();
         return view('search',compact('search','search1'));
+    }
+     public function add($id,$idUser)
+    {
+        $sanpham=sanpham::where('id',$id)->first();
+       // if($sanpham->giakm == 0) 
+       //  {
+       //      Cart::add(array('id'=>$id,'name'=>$sanpham->name,'qty'=>1,'price'=>$sanpham->gia,'options'=>array('img'=>$sanpham->image)));
+       //  } 
+       // else
+       //  {
+       //      Cart::add(array('id'=>$id,'name'=>$sanpham->name,'qty'=>1,'price'=>$sanpham->giakm,'options'=>array('img'=>$sanpham->image)));
+       //  }
+        $cart=new shoppingcart;
+        $cart->idUser=$idUser;
+        $cart->idsp=$id;
+        $cart->name=$sanpham->name;
+        $cart->qty=1;
+        if($sanpham->giakm == 0) 
+        {
+              $cart->price=$sanpham->gia;
+        } 
+       else
+        {
+             $cart->price=$sanpham->giakm;
+        } 
+        $cart->img=$sanpham->image;
+        $cart->save();
+        // $content = Cart::content();
+        return redirect()->back()->with('thongbao','Thêm vào giỏ hàng thành công ');
+    }
+    public function getgiohang($idUser)
+    {
+        $cart=shoppingcart::where('idUser',$idUser)->paginate(3);
+         return view('shopping_cart',compact('cart'));
+    }
+    public function logincart()
+        {
+             return redirect('login')->with('thongbao','Đăng nhập để mua hàng');
+        }
+    public function decart($id)
+    {
+        $decart=shoppingcart::find($id);
+        $decart->delete();
+        return redirect()->back()->with('thongbao','Xóa Thành công');
+    }
+    public function quenmatkhau()
+    {
+        return view('resetpassword');
+    }
+    public function resetpassword(Request $request)
+    {
+       
+       $user=User::where('email',$request->email)->first();
+       if(count($user)>0)
+       {
+            $password=str_random(11);
+            $user->update([
+                'password' =>Hash::make($password)
+            ]);
+            Mail::send('mailreset', ['password'=>$password], function($message) use ($request,$user) {
+            $message->from('cuonganh365@gmail.com','ShopHoa360');
+             $message->to( $request->email,$user->name)   
+                ->subject('reset your password on ShopHoa360 ');
+        });
+         return redirect('login')->with('thongbao','Mật khẩu mới đã được gửi tới email '.$request->email)->withinput();
+       }
+       else
+       {
+            return redirect()->back()->with('thongbao','Email này chưa được đăng kí');
+       }   
     }
 }
 

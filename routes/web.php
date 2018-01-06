@@ -18,12 +18,18 @@ route::get('search',['as'=>'search','uses'=>'DoAn_Controller@getsearch']);
 route::get('search1',['as'=>'search1','uses'=>'DoAn_Controller@getsearch1']);
 route::get('login',['as'=>'login_index','uses'=>'DoAn_Controller@getlogin_index']);
 route::post('login',['as'=>'login_post','uses'=>'DoAn_Controller@postlogin']);
+route::post('resetpassword',['as'=>'resetpassword','uses'=>'DoAn_Controller@resetpassword']);
 route::get('Logoutindex','DoAn_Controller@getlogoutindex'); //log out 
 route::get('signup',['as'=>'signup_index','uses'=>'DoAn_Controller@getsignup_index']);
 route::post('signup',['as'=>'signup_idp','uses'=>'DoAn_Controller@postsignup_index']);
 Route::get('register/verify/{code}',['as'=>'xacnhanlogin','uses'=>'DoAn_Controller@verify']);
 Route::get('thongtin/{id}',['as'=>'thongtin','uses'=>'DoAn_Controller@getthongtin']);
 Route::post('thongtin/{id}',['as'=>'thongtin','uses'=>'DoAn_Controller@postthongtin']);
+route::get('add/{id}/{idUser}',['as'=>'add','uses'=>'DoAn_Controller@add']);
+route::get('getgiohang/{idUser}',['as'=>'getgiohang','uses'=>'DoAn_Controller@getgiohang']);
+route::get('logincart',['as'=>'logincart','uses'=>'DoAn_Controller@logincart']);
+route::get('decart/{id}',['as'=>'decart','uses'=>'DoAn_Controller@decart']);
+route::get('quenmatkhau',['as'=>'quenmatkhau','uses'=>'DoAn_Controller@quenmatkhau']);
 route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function()
 {
 route::Get('admindslh',['as'=>'dslh','uses'=>'DoAn_Controller@getdslh']);//get danh sách loại hoa ** admin

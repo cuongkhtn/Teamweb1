@@ -67,8 +67,12 @@
 										</p>
 									</div>
 									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="product.html"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="product.html">+Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+										<a class="add-to-cart pull-left" href="#"><i class="fa fa-shopping-cart"></i></a>
+										@if(Auth::check())
+										<a class="beta-btn primary" href="{{url('add/'.$tsp->id.'/'.Auth::user()->id)}}">+Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+										@else
+										<a class="beta-btn primary" href={{route('logincart')}}>+Giỏ hàng <i class="fa fa-chevron-right"></i></a>
+										@endif
 										<div class="clearfix"></div>
 										<br>
 										<br>

@@ -22,7 +22,6 @@ class Comment extends Migration
             $table->integer('idhoa')->unsigned();
             $table->foreign('idhoa')->references('id')->on('sanpham');
             $table->string('NoiDung');
-            $table->string('NoiDung');
             $table->timestamps();
         });
     }
