@@ -43,10 +43,13 @@ route::Get('adminthemh',['as'=>'themhg','uses'=>'DoAn_Controller@getthemh']);//g
 route::Post('adminthemh',['as'=>'themhp','uses'=>'DoAn_Controller@postthemh']);//post thêm hoa * admin
 //route::Get('adminth',['as'=>'themh','uses'=>'DoAn_Controller@getthemh']);//get thêm hoa * admin
 route::Get('adminedith/{id}',['as'=>'edithg','uses'=>'DoAn_Controller@getedith']);//get edit hoa ** 
-route::post('adminedith/{id}',['as'=>'edithb','uses'=>'DoAn_Controller@postedith']);//post edit loại hoa ** admin
+route::post('adminedith/{id}',['as'=>'edithb','uses'=>'DoAn_Controller@postedith']);//post edit loại hoa** admin
 route::Get('adminxoah/{id}',['as'=>'dehg','uses'=>'DoAn_Controller@getxoah']);
 route::Get('adminuser',['as'=>'dsus','uses'=>'DoAn_Controller@getuser']);//get user *** admin
 route::Get('adminthemuser',['as'=>'themus','uses'=>'DoAn_Controller@getthemuser']);// thêm user *** admin
+route::post('adminthemuser',['as'=>'adminthemuser','uses'=>'DoAn_Controller@adminthemuser']);
+route::get('getsua/{id}',['as'=>'getsua','uses'=>'DoAn_Controller@getsua']);//get edit  **
+route::post('postsua/{id}',['as'=>'postsua','uses'=>'DoAn_Controller@postsua']);
 route::get('Logout','DoAn_Controller@getlogout'); //log out 
 });
 route::post('comment/{id}',['as'=>'cmt','uses'=>'comment_Controller@postcmt']);

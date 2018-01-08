@@ -15,36 +15,24 @@
                                 <th>ID</th>
                                 <th>Username</th>
                                 <th>Level</th>
-                                <th>Status</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($user as $user)
                             <tr class="odd gradeX" align="center">
-                                <td>1</td>
-                                <td>quoctuan</td>
-                                <td>Superadmin</td>
-                                <td>Hiện</td>
+                                <td>{{$user->id}}</td>
+                                <td>{{$user->name}}</td>
+                                @if(($user->loaiuser) == 1)
+                                    <td>admin</td>
+                                @else
+                                    <td>member</td>
+                                @endif
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('getsua',$user->id)}}">Edit</a></td>
                             </tr>
-                            <tr class="even gradeC" align="center">
-                                <td>2</td>
-                                <td>kutun</td>
-                                <td>Admin</td>
-                                <td>Ẩn</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                            </tr>
-                            <tr class="odd gradeX" align="center">
-                                <td>3</td>
-                                <td>kuteo</td>
-                                <td>Member</td>
-                                <td>Hiện</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

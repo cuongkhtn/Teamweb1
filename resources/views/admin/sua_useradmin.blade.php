@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">User
-                            <small>Add</small>
+                            <small>Edit</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -22,15 +22,15 @@
                                     {{session('thongbao')}}
                                 </div>
                             @endif
-                        <form action="{{route('adminthemuser')}}" method="POST" >
+                        <form action="{{route('postsua',$user->id)}}" method="POST" >
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="Please Enter Email" value="{{ old('email')}}" />
+                                <input type="email" class="form-control" name="email" placeholder="Please Enter Email"  value="{{$user->email}}" readonly="" />
                             </div>
                             <div class="form-group">
                                 <label>Username</label>
-                                <input class="form-control" name="name" placeholder="Please Enter Username" value="{{ old('name')}}" />
+                                <input class="form-control" name="name" placeholder="Please Enter Username" value="{{$user->name}}" />
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
@@ -42,12 +42,22 @@
                             </div>
                             <div class="form-group">
                                 <label>User Level</label>
+                                @if($user->loaiuser != 2)
                                 <label class="radio-inline">
-                                    <input name="rdoLevel" value="1"  type="radio">Admin
+                                    <input name="rdoLevel" value="1"  type="radio" checked="" >Admin
                                 </label>
                                 <label class="radio-inline">
                                     <input name="rdoLevel" value="2" type="radio">Member
                                 </label>
+                                @else
+                                <label class="radio-inline">
+                                    <input name="rdoLevel" value="1"  type="radio" >Admin
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="rdoLevel" value="2" type="radio" checked="" >Member
+                                </label>
+                                @endif
+
                             </div>
                             <button type="submit" class="btn btn-default">User Add</button>
                             <button type="reset" class="btn btn-default">Reset</button>

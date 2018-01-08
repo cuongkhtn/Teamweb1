@@ -398,7 +398,8 @@ class DoAn_Controller extends Controller
 
     public function getuser()
     {
-        return view('admin.user');
+        $user=user::all();
+        return view('admin.user',compact('user'));
     }
 
     public function getthemuser()
@@ -523,6 +524,83 @@ class DoAn_Controller extends Controller
        {
             return redirect()->back()->with('thongbao','Email này chưa được đăng kí');
        }   
+    }
+    //////
+    public function adminthemuser(Request $request)
+    {
+        $this->validate($request,
+            [
+                'email'=>'unique:users,email|required',//min:3
+                're_password'=>'same:password|required',
+                'password'=>'required',
+                'name'=>'required',
+                'rdoLevel'=>'required',
+            ],
+            [
+                'email.required'=>'Bạn chưa nhập email',
+                'rdoLevel.required'=>'Vui lòng cấp quyền cho tài khoản',
+                'name.required'=>'Bạn chưa nhập name',
+                'password.required'=>'Bạn chưa nhập password',
+                're_password.required'=>'Bạn chưa nhập ô xác nhận mật khẩu',
+                'email.unique'=>'email đã tồn tại',
+                're_password.same'=>'Mật khẩu không trùng nhau',
+            ]
+        );
+        $user=new User();
+        $user=new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->phone='';
+        $user->address='';
+        if($request->rdoLevel == 1)
+        {
+            $user->loaiuser=1;
+        }
+        else
+        {
+             $user->loaiuser=2;
+        }
+        $user->confirmed=1;
+        $user->save();
+         return redirect()->back()->with('thongbao','Thêm user thành công')->withinput();
+    }
+
+    public function getsua($id)
+    {
+        $user = User::find($id);
+        return view('admin.sua_useradmin',compact('user'));
+    }
+    public function postsua(Request $request,$id)
+    {
+        $this->validate($request,
+          [       
+                
+                'name'=>'required',
+                'rdoLevel'=>'required',
+            ],
+            [
+                'rdoLevel.required'=>'Vui lòng cấp quyền cho tài khoản',
+                'name.required'=>'Bạn chưa nhập name',
+            ]);
+        $user=user::where('id',$id)->update(['name'=>$request->name,'loaiuser'=> $request->rdoLevel]);     
+        if($request->password || $request->re_password != null)
+        {
+            $this->validate($request,
+          [       
+                're_password'=>'same:password|required',
+                'password'=>'required',
+            ],
+            [
+                'password.required'=>'Bạn chưa nhập password',
+                're_password.required'=>'Bạn chưa nhập ô xác nhận mật khẩu',
+                're_password.same'=>'Mật khẩu không trùng nhau',
+            ]);
+             $user=user::where('id',$id)->update([
+                'password'=>Hash::make($request->password),
+            ]);
+        }
+        return redirect()->back()->with('thongbao','Update thành công');
     }
 }
 

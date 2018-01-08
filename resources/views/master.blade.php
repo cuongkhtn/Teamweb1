@@ -69,7 +69,7 @@
 					<div class="beta-comp">
 						<div class="cart">
 							<a href="{{route('getgiohang',Auth::user()->id)}}" class="beta-select"><i class="fa fa-shopping-cart">
-							</i><a href="{{route('getgiohang',Auth::user()->id)}}"> Giỏ hàng <span style="background-color: orange">{{count($cart2)}}</span></a><i ></i>
+							</i><a href="{{route('getgiohang',Auth::user()->id)}}"> Giỏ hàng <span style="background-color: orange;width: 100px">&nbsp;({{count($cart2)}})&nbsp;</span></a><i ></i>
 							</a>
 						</div> <!-- .cart -->
 					</div>
