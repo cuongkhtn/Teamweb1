@@ -4,29 +4,34 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShoppingcartTable extends Migration
+class Customer extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up()
     {
-        Schema::create(config('cart.database.table'), function (Blueprint $table) {
+        Schema::create('Customer', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idUser');
-            $table->integer('idsp');
             $table->string('name');
-            $table->integer('qty');
-            $table->integer('price');
-            $table->string('img');
+            $table->string('sex',5);
+            $table->string('email',101);
+            $table->string('address',255);
+            $table->integer('phone');
+            $table->string('note',255);
             $table->nullableTimestamps();
         });
     }
+
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down()
     {
-        Schema::drop(config('cart.database.table'));
+         Schema::dropIfExists('Customer');
     }
 }

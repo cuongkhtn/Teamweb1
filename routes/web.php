@@ -30,6 +30,8 @@ route::get('getgiohang/{idUser}',['as'=>'getgiohang','uses'=>'DoAn_Controller@ge
 route::get('logincart',['as'=>'logincart','uses'=>'DoAn_Controller@logincart']);
 route::get('decart/{id}',['as'=>'decart','uses'=>'DoAn_Controller@decart']);
 route::get('quenmatkhau',['as'=>'quenmatkhau','uses'=>'DoAn_Controller@quenmatkhau']);
+route::get('getcheckout/{id}',['as'=>'getcheckout','uses'=>'DoAn_Controller@getcheckout']);
+route::post('order/{id}',['as'=>'order','uses'=>'DoAn_Controller@order']);
 route::group(['prefix'=>'admin','middleware'=>'adminlogin'],function()
 {
 route::Get('admindslh',['as'=>'dslh','uses'=>'DoAn_Controller@getdslh']);//get danh sách loại hoa ** admin
@@ -50,7 +52,7 @@ route::Get('adminthemuser',['as'=>'themus','uses'=>'DoAn_Controller@getthemuser'
 route::post('adminthemuser',['as'=>'adminthemuser','uses'=>'DoAn_Controller@adminthemuser']);
 route::get('getsua/{id}',['as'=>'getsua','uses'=>'DoAn_Controller@getsua']);//get edit  **
 route::post('postsua/{id}',['as'=>'postsua','uses'=>'DoAn_Controller@postsua']);
-route::get('Logout','DoAn_Controller@getlogout'); //log out 
+route::get('Logout',['as'=>'Logout','uses'=>'DoAn_Controller@getlogout']); //log out 
 });
 route::post('comment/{id}',['as'=>'cmt','uses'=>'comment_Controller@postcmt']);
 route::Get('360qt69',['as'=>'admin','uses'=>'DoAn_Controller@getadmin']);//get login admin

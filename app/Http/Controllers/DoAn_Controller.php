@@ -10,6 +10,9 @@ use App\loaisp;
 use App\User;
 use App\shoppingcart;
 use App\comment;
+use App\bill;
+use App\customer;
+use App\order;
 use Hash;
 use Mail;
 use Cart;
@@ -458,36 +461,51 @@ class DoAn_Controller extends Controller
      public function add($id,$idUser)
     {
         $sanpham=sanpham::where('id',$id)->first();
+        $dk=shoppingcart::where([
+            ['idUser',$idUser],
+            ['idsp',$id],
+            ])->first();
        // if($sanpham->giakm == 0) 
        //  {
        //      Cart::add(array('id'=>$id,'name'=>$sanpham->name,'qty'=>1,'price'=>$sanpham->gia,'options'=>array('img'=>$sanpham->image)));
        //  } 
        // else
        //  {
-       //      Cart::add(array('id'=>$id,'name'=>$sanpham->name,'qty'=>1,'price'=>$sanpham->giakm,'options'=>array('img'=>$sanpham->image)));
+       //      Cart::add(array('id'=>$id,'name'=>$sanpham->name,'qty'=>1,'price'=>$sanpham->giakm,'options'=>array('img'=>$ sanpham->image)));
        //  }
-        $cart=new shoppingcart;
-        $cart->idUser=$idUser;
-        $cart->idsp=$id;
-        $cart->name=$sanpham->name;
-        $cart->qty=1;
-        if($sanpham->giakm == 0) 
+        if(count($dk)!=0)
         {
-              $cart->price=$sanpham->gia;
-        } 
-       else
+            $dk->update([
+                'qty'=>$dk->qty +1,
+            ]);
+            return redirect()->back()->with('thongbao','Thêm vào giỏ hàng thành công ');
+        }
+        else
         {
-             $cart->price=$sanpham->giakm;
-        } 
-        $cart->img=$sanpham->image;
-        $cart->save();
-        // $content = Cart::content();
-        return redirect()->back()->with('thongbao','Thêm vào giỏ hàng thành công ');
+            $cart=new shoppingcart;
+            $cart->idUser=$idUser;
+            $cart->idsp=$id;
+            $cart->name=$sanpham->name;
+            $cart->qty=1;
+            if($sanpham->giakm == 0) 
+            {
+                  $cart->price=$sanpham->gia;
+            } 
+           else
+            {
+                 $cart->price=$sanpham->giakm;
+            } 
+            $cart->img=$sanpham->image;
+            $cart->save();
+            // $content = Cart::content();
+            return redirect()->back()->with('thongbao','Thêm vào giỏ hàng thành công ');
+        }
     }
     public function getgiohang($idUser)
     {
         $cart=shoppingcart::where('idUser',$idUser)->paginate(3);
-         return view('shopping_cart',compact('cart'));
+         $cart1=shoppingcart::where('idUser',$idUser)->first();
+         return view('shopping_cart',compact('cart','cart1'));
     }
     public function logincart()
         {
@@ -601,6 +619,45 @@ class DoAn_Controller extends Controller
             ]);
         }
         return redirect()->back()->with('thongbao','Update thành công');
+    }
+    public function getcheckout($id)
+    {
+        $cart=shoppingcart::where('idUser',$id)->get();
+        return view('checkout',compact('cart'));
+    }
+
+    public function order(Request $request,$id)
+    {
+        $giohang=shoppingcart::where('idUser',$id)->get();
+        $customer=new customer();
+        $customer->name=$request->name;
+        $customer->sex=$request->gender;
+        $customer->email=$request->email;
+        $customer->address=$request->address;
+        $customer->phone=$request->phone;
+        $customer->note=$request->note;
+        $customer->save();
+        
+         $bill=new bill();
+        $bill->iduser=$id;
+        $bill->idkh=$customer->id;
+        $bill->total=$request->total;
+        $bill->payment=$request->payment_method;
+        $bill->save();
+        foreach($giohang as $giohang )
+        {
+        $order=new Order();
+        $order->idbill=$bill->id;
+        $order->idsp=$giohang->idsp;
+        $order->name=$giohang->name;
+        $order->qty=$giohang->qty;
+        $order->price=$giohang->price;
+        $order->save();
+        $giohang->delete();
+        }
+         
+       
+        return redirect()->back()->with('thongbao','Đặt hàng thành công');
     }
 }
 

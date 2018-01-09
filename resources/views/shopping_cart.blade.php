@@ -33,17 +33,11 @@
 							</td>
 
 							<td class="product-quantity">
-								<select name="product-qty" id="product-qty">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
+								<span class="amount">{{$item->qty}}</span>
 							</td>
 
 							<td class="product-subtotal">
-								<span class="amount">{{$item->price}}</span>
+								<span class="amount">{{$item->price * $item->qty}}</span>
 							</td>
 
 							<td class="product-remove">
@@ -94,15 +88,22 @@
 						<p><button type="submit" name="calc_shipping" value="1" class="beta-btn primary pull-right">Update Totals</button></p>
 					</section>
 				</form>
-
+<i style="font-size: 0">{{$a = 0,$b=0}}
+					@foreach($cart as $item)
+					{{$a += $item->price * $item->qty}}
+					@endforeach</i>
 				<div class="cart-totals pull-right">
+					
 					<div class="cart-totals-row"><h5 class="cart-total-title">Giá trị đơn hàng</h5></div>
-					<div class="cart-totals-row"><span>Tạm Tính:</span> <span>$188.00</span></div>
-					<div class="cart-totals-row"><span>Giảm giá:</span> <span>Free Shipping</span></div>
-					<div class="cart-totals-row"><span>Thành tiền:</span> <span>$188.00</span></div>
+					<div class="cart-totals-row"><span>Tạm Tính:</span> <span>{{$a}}</span></div>
+					<div class="cart-totals-row"><span>Giảm giá:</span> <span style="margin-left: 10px">{{$b}}</span></div>
+					<div class="cart-totals-row"><span>Thành tiền:</span> <span>{{$a-$b}}</span></div>
 				</div>
-
+				
 				<div class="clearfix"></div>
+				@if(count($cart1) <> null)
+				<div style="float:right; "><a href="{{route('getcheckout',Auth::user()->id)}}"><button style="width: 270px;height: 40px;background-color: #3a5c83;color: #fff"> Đặt hàng</button></a></div>
+				@endif
 			</div>
 			<!-- End of Cart Collaterals -->
 			<div class="clearfix"></div>
